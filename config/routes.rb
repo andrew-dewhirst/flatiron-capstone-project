@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   resources :carts
   resources :line_items
   resources :reviews
-  resources :users
-
+  resources :users, only: [:index, :update, :destroy]
+  
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
 
