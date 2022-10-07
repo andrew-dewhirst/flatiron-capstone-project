@@ -8,7 +8,7 @@ import { Route, Switch } from "react-router-dom";
 // import MyRenovation from "./MyRenovation";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
   // const [renovations, setRenovations] = useState([]);
   // const [errors, setErrors] = useState([]);
 
@@ -26,7 +26,7 @@ function App() {
       .then((user) => setUser(user));
   }, []);
 
-  console.log(user)
+  console.log(user.avatar)
 
 
 
@@ -87,7 +87,7 @@ function App() {
   return (
     <div>
       Testing
-      {/* <img src={`http://localhost:3000${user.avatar}`} /> */}
+      <img src={`http://localhost:3000${user.avatar}`} />
     </div>
   )
 }
