@@ -21,3 +21,17 @@ andrew.avatar.attach(
   filename: 'kid.png',
   content_type: 'application/png'
 )
+
+charizard = Card.create(
+  name: "Charizard",
+  description: "Base set - 4/102: Holographic Charizard from the original Pokemon card set",
+  condition: "Mint",
+  price: 500.00,
+  quantity: 2
+)
+
+charizard.card_pic.attach(
+  io: File.open('./public/card_pics/charizard.png'),
+  filename: 'charizard.png',
+  content_type: 'application/png'
+)
