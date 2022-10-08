@@ -1,5 +1,5 @@
 class Card < ApplicationRecord
-  has_one_attached :card_pic
+  has_one_attached :avatar
 
   has_many :reviews, dependent: :destroy
   has_many :users, through: :reviews

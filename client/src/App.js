@@ -21,12 +21,12 @@ function App() {
   // }, []);
 
   useEffect(() => {
-    fetch("/users")
+    fetch("/cards")
       .then((r) => r.json())
       .then((user) => setUser(user));
   }, []);
 
-  console.log(user.avatar)
+  console.log(user)
 
 
 
@@ -87,7 +87,7 @@ function App() {
   return (
     <div>
       Testing
-      <img src={`http://localhost:3000${user.avatar}`} />
+      {/* <img src={`http://localhost:3000${user.avatar}`} /> */}
     </div>
   )
 }

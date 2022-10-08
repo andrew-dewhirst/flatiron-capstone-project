@@ -1,10 +1,13 @@
 class CardsController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
-  before_action :authorize
+  # before_action :authorize
 
   def index
-    cards = Card.all
-    render json: cards
+    # cards = Card.all
+    cards = Card.first
+    avatar = rails_blob_path(cards.avatar)
+    # render json: cards
+    render json: { cards: cards, avatar: avatar }
   end
 
   def create
