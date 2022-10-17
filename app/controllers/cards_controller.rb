@@ -3,11 +3,11 @@ class CardsController < ApplicationController
   # before_action :authorize
 
   def index
-    # cards = Card.all
-    cards = Card.first
-    avatar = rails_blob_path(cards.avatar)
-    # render json: cards
-    render json: { cards: cards, avatar: avatar }
+    cards = Card.all
+    # cards = Card.first
+    # avatar = rails_blob_path(cards.avatar)
+    render json: cards
+    # render json: { cards: cards, avatar: avatar }
   end
 
   def create
