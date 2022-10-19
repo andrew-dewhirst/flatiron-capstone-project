@@ -5,7 +5,7 @@ function NavBar() {
 
   const navStyle = {
     display: "inline-block",
-    width: "25%",
+    width: "15%",
     padding: "12px",
     margin: "0 4% 6px",
     background: "black",
@@ -22,47 +22,26 @@ function NavBar() {
       >
         Home
       </NavLink>
-      <NavLink to ="/cards/pokemon"
+      <NavLink to ="/renovations"
       exact
       style={navStyle}
       activeStyle={{background: "#696969"}}
       >
-        Pokemon
+        View All Renovations
       </NavLink>
-      <NavLink to ="/cards/mlb"
+      <NavLink to ="/my_renovations"
       exact
       style={navStyle}
       activeStyle={{background: "#696969"}}
       >
-        MLB
+        View My Renovations
       </NavLink>
-      <NavLink to ="/cards/nba"
+      <NavLink to ="/new_renovation"
       exact
       style={navStyle}
       activeStyle={{background: "#696969"}}
       >
-        NBA
-      </NavLink>
-      <NavLink to ="/cards/nhl"
-      exact
-      style={navStyle}
-      activeStyle={{background: "#696969"}}
-      >
-        NHL
-      </NavLink>
-      <NavLink to ="/cards/nfl"
-      exact
-      style={navStyle}
-      activeStyle={{background: "#696969"}}
-      >
-        NFL
-      </NavLink>
-      <NavLink to ="/myaccount"
-      exact
-      style={navStyle}
-      activeStyle={{background: "#696969"}}
-      >
-        My Account
+        Create New Renovation
       </NavLink>
     </div>
   )
