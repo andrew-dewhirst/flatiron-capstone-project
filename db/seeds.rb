@@ -22,17 +22,23 @@ andrew.avatar.attach(
   content_type: 'application/png'
 )
 
-charizard = Card.create(
+Card.create(
   name: "Charizard",
   description: "Base set - 4/102: Holographic Charizard from the original Pokemon card set",
   condition: "Mint",
   price: 500.00,
   quantity: 2,
-  genre: "Pokemon"
+  genre: "Pokemon",
+  image: File.open(Rails.root.join('db/images/charizard.png'))
 )
 
-charizard.avatar.attach(
-  io: File.open('./public/avatars/kid.png'),
-  filename: 'kid.png',
-  content_type: 'application/png'
+Card.create(
+  name: "Mike Trout",
+  description: "Mike Trout rookie card - Topps",
+  condition: "Near Mint",
+  price: 145.00,
+  quantity: 3,
+  genre: "Baseball",
+  image: File.open(Rails.root.join('db/images/trout.jpeg'))
 )
+

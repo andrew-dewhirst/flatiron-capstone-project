@@ -4,10 +4,7 @@ class CardsController < ApplicationController
 
   def index
     cards = Card.all
-    # cards = Card.first
-    # avatar = rails_blob_path(cards.avatar)
     render json: cards
-    # render json: { cards: cards, avatar: avatar }
   end
 
   def create
