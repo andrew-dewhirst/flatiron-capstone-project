@@ -22,26 +22,40 @@ function NavBar() {
       >
         Home
       </NavLink>
-      <NavLink to ="/renovations"
+      <NavLink to ="/genre/pokemon"
       exact
       style={navStyle}
       activeStyle={{background: "#696969"}}
       >
-        View All Renovations
+        Pokemon
       </NavLink>
-      <NavLink to ="/my_renovations"
+      <NavLink to ="/genre/mlb"
       exact
       style={navStyle}
       activeStyle={{background: "#696969"}}
       >
-        View My Renovations
+        MLB
       </NavLink>
-      <NavLink to ="/new_renovation"
+      <NavLink to ="/genre/nba"
       exact
       style={navStyle}
       activeStyle={{background: "#696969"}}
       >
-        Create New Renovation
+        NBA
+      </NavLink>
+      <NavLink to ="/genre/nhl"
+      exact
+      style={navStyle}
+      activeStyle={{background: "#696969"}}
+      >
+        NHL
+      </NavLink>
+      <NavLink to ="/genre/nfl"
+      exact
+      style={navStyle}
+      activeStyle={{background: "#696969"}}
+      >
+        NFL
       </NavLink>
     </div>
   )
