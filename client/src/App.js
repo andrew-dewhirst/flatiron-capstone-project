@@ -54,6 +54,7 @@ function App() {
   if (!user) return (
     <div>
       <h3>{errors}</h3>
+      <NavBar />
       <Login onLogin={setUser} setErrors={setErrors} />;
     </div>
   )

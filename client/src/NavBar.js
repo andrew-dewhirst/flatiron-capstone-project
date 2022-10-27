@@ -57,6 +57,13 @@ function NavBar() {
       >
         NFL
       </NavLink>
+      <NavLink to ="/myaccount"
+      exact
+      style={navStyle}
+      activeStyle={{background: "#696969"}}
+      >
+        My Account
+      </NavLink>
     </div>
   )
 }
