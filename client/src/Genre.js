@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from 'react-router-dom';
-// import Search from "./Search";
+import Search from "./Search";
 // import StadiumList from "./StadiumList";
 
 function Genre( {searchTerm, setSearchTerm, cardsToDisplay, setCardsToDisplay} ) {
@@ -12,7 +12,7 @@ function Genre( {searchTerm, setSearchTerm, cardsToDisplay, setCardsToDisplay} )
 
   return (
     <div>
-      Testing
+      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
     </div>
   )
 }
