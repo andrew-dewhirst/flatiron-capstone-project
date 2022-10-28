@@ -22,40 +22,40 @@ function NavBar() {
       >
         Home
       </NavLink>
-      <NavLink to ="/genre/pokemon"
+      <NavLink to ="/cards/pokemon"
       exact
       style={navStyle}
       activeStyle={{background: "#696969"}}
       >
         Pokemon
       </NavLink>
-      <NavLink to ="/genre/mlb"
+      <NavLink to ="/cards/baseball"
       exact
       style={navStyle}
       activeStyle={{background: "#696969"}}
       >
-        MLB
+        Baseball
       </NavLink>
-      <NavLink to ="/genre/nba"
+      <NavLink to ="/cards/basketball"
       exact
       style={navStyle}
       activeStyle={{background: "#696969"}}
       >
-        NBA
+        Basketball
       </NavLink>
-      <NavLink to ="/genre/nhl"
+      <NavLink to ="/cards/hockey"
       exact
       style={navStyle}
       activeStyle={{background: "#696969"}}
       >
-        NHL
+        Hockey
       </NavLink>
-      <NavLink to ="/genre/nfl"
+      <NavLink to ="/cards/football"
       exact
       style={navStyle}
       activeStyle={{background: "#696969"}}
       >
-        NFL
+        Football
       </NavLink>
       <NavLink to ="/myaccount"
       exact

@@ -6,9 +6,13 @@ import Home from "./Home";
 import RenovationList from "./RenovationList";
 import NewRenovation from "./NewRenovation";
 import MyRenovation from "./MyRenovation";
+import Account from "./Account";
+import Genre from "./Genre";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
+  const [cards, setCards] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [renovations, setRenovations] = useState([]);
   const [errors, setErrors] = useState([]);
 
@@ -21,11 +25,18 @@ function App() {
   }, []);
 
   useEffect(() => {
+    fetch("/cards")
+      .then((r) => r.json())
+      .then((card) => setCards(card));
+  }, {});
+
+  useEffect(() => {
     fetch("/renovations")
       .then((r) => r.json())
       .then((renovation) => setRenovations(renovation));
   }, []);
 
+  const cardsToDisplay = cards.filter((card) => card.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
   function handleLogoutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
@@ -66,8 +77,14 @@ function App() {
           Logout
      </button>
       <Switch>
-      <Route exact path="/">
-          <Home user={user}/>
+        <Route exact path="/">
+            <Home user={user}/>
+          </Route>
+        <Route exact path="/myaccount">
+          <Account user={user} avatar={user.avatar} />
+        </Route>
+        <Route exact path='/cards/:genre'>
+          <Genre searchTerm={searchTerm} setSearchTerm={setSearchTerm} cardsToDisplay={cardsToDisplay} setCards={setCards} />
         </Route>
         <Route exact path="/renovations">
           <RenovationList renovations={renovations} user={user} handleUpdateRenovation={handleUpdateRenovation} />
