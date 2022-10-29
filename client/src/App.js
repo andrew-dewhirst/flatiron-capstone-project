@@ -36,6 +36,8 @@ function App() {
       .then((renovation) => setRenovations(renovation));
   }, []);
 
+  console.log(user.avatar)
+
   const cardsToDisplay = cards.filter((card) => card.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
   function handleLogoutClick() {

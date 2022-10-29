@@ -19,7 +19,7 @@ function CardList({ filteredCards, cardsToDisplay, setCards }) {
       {filteredCards.map((card) =>
       <CardInfo
         key={card.id}
-        stadium={stadium}
+        card={card}
         // handleAttendanceClick={handleAttendanceClick}
       />
       )}

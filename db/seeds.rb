@@ -29,7 +29,7 @@ Card.create(
   price: 500.00,
   quantity: 2,
   genre: "Pokemon",
-  image: File.open(Rails.root.join('db/images/charizard.png'))
+  image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8SaVlC1-vPxZDHBVEAEzaOTmpijXM6ewxzg&usqp=CAU"
 )
 
 Card.create(
@@ -39,6 +39,6 @@ Card.create(
   price: 145.00,
   quantity: 3,
   genre: "Baseball",
-  image: File.open(Rails.root.join('db/images/trout.jpeg'))
+  image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg5GN2sxtu9XcPXBLMCTHDnwL06BYrO26HB5p9aVoezph49pI9kh5vvQZr2fZT3B68_tc&usqp=CAU"
 )
 
