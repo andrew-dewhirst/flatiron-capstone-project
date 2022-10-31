@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 
 function CardInfo({ card }) {
 
@@ -23,7 +24,9 @@ function CardInfo({ card }) {
             <p>Description: {card.description}</p>
       <p>Price: {card.price} </p>
       <button>Add To Cart</button>
-      <button>Checkout</button>
+      <Link to="/checkout">
+        <button>Checkout</button>
+      </Link>
       {/* {stadium.attended ? (
         <button onClick={handleButtonClick}>Crossed off the List</button>
       ) : (

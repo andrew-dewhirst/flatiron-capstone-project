@@ -8,6 +8,7 @@ import NewRenovation from "./NewRenovation";
 import MyRenovation from "./MyRenovation";
 import Account from "./Account";
 import Genre from "./Genre";
+import CheckoutForm from "./CheckoutForm";
 
 function App() {
   const [user, setUser] = useState({});
@@ -87,6 +88,9 @@ function App() {
         </Route>
         <Route exact path='/cards/:genre'>
           <Genre searchTerm={searchTerm} setSearchTerm={setSearchTerm} cardsToDisplay={cardsToDisplay} setCards={setCards} />
+        </Route>
+        <Route exact path='/checkout'>
+          <CheckoutForm />
         </Route>
         <Route exact path="/renovations">
           <RenovationList renovations={renovations} user={user} handleUpdateRenovation={handleUpdateRenovation} />
