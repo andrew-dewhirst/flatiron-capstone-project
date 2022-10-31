@@ -22,6 +22,8 @@ function CardInfo({ card }) {
       <img src={card.image} alt={card.name} />
             <p>Description: {card.description}</p>
       <p>Price: {card.price} </p>
+      <button>Add To Cart</button>
+      <button>Checkout</button>
       {/* {stadium.attended ? (
         <button onClick={handleButtonClick}>Crossed off the List</button>
       ) : (
