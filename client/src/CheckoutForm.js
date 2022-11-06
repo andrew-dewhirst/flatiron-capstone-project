@@ -44,67 +44,6 @@ function CheckoutForm() {
 
   return (
     <div>
-      <form className="top-bottom">
-        <label className="control">
-          <span>Button color</span>
-          <select
-            value={buttonColor}
-            onChange={event => setButtonColor(event.target.value)}
-          >
-            <option value="default">default</option>
-            <option value="black">black</option>
-            <option value="white">white</option>
-          </select>
-        </label>
-        <label className="control">
-          <span>Button type</span>
-          <select
-            value={buttonType}
-            onChange={event => setButtonType(event.target.value)}
-          >
-            <option value="buy">buy</option>
-            <option value="plain">plain</option>
-            <option value="donate">donate</option>
-          </select>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={buttonSizeMode === "fill"}
-            onChange={event =>
-              setButtonSizeMode(event.target.checked ? "fill" : "static")
-            }
-          />
-          <span>Custom button size</span>
-        </label>
-        <label className="control">
-          <span>
-            Button width <span className="value">({buttonWidth}px)</span>
-          </span>
-          <input
-            type="range"
-            min="160"
-            max="800"
-            value={buttonWidth}
-            onChange={event => setButtonWidth(Number(event.target.value))}
-            disabled={buttonSizeMode !== "fill"}
-          />
-        </label>
-        <label className="control">
-          <span>
-            Button height <span className="value">({buttonHeight}px)</span>
-          </span>
-          <input
-            type="range"
-            min="40"
-            max="100"
-            value={buttonHeight}
-            onChange={event => setButtonHeight(Number(event.target.value))}
-            disabled={buttonSizeMode !== "fill"}
-          />
-        </label>
-      </form>
-
       <div className="demo">
         <GooglePayButton
           environment="TEST"
