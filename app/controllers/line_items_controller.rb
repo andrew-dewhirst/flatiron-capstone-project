@@ -5,7 +5,7 @@ class LineItemsController < ApplicationController
 
   def index
     line_items = LineItem.all
-    render json: line_item
+    render json: line_items
   end
 
   # GET /line_items/1
@@ -24,19 +24,25 @@ class LineItemsController < ApplicationController
 
   # POST /line_items
   # POST /line_items.json
-  def create
-    card = Card.find(params[:card_id])
-    @line_item = @cart.add_card(card)
+  # def create
+  #   card = Card.find(params[:card_id])
+  #   @line_item = @cart.add_card(card)
 
-    respond_to do |format|
-      if @line_item.save
-        format.html { redirect_to @line_item.cart, notice: 'Item added to cart.' }
-        format.json { render :show, status: :created, location: @line_item }
-      else
-        format.html { render :new }
-        format.json { render json: @line_item.errors, status: :unprocessable_entity }
-      end
-    end
+  #   respond_to do |format|
+  #     if @line_item.save
+  #       format.html { redirect_to @line_item.cart, notice: 'Item added to cart.' }
+  #       format.json { render :show, status: :created, location: @line_item }
+  #     else
+  #       format.html { render :new }
+  #       format.json { render json: @line_item.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
+
+  def create
+    card = Card.find(params[:id])
+    line_item = card.line_item.create!(line_item_params)
+    render json: line_item, status: :created
   end
 
   # PATCH/PUT /line_items/1
@@ -72,6 +78,6 @@ class LineItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def line_item_params
-      params.require(:line_item).permit(:card_id)
+      params.permit(:quantity, :card_id, :cart_id)
     end
 end

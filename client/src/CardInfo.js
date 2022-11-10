@@ -17,21 +17,24 @@ function CardInfo({ card }) {
 //       .then((updatedItem) => handleAttendanceClick(updatedItem));
 // }
 
+  function handleAddToCartClick() {
+    console.log("Added to Cart!")
+  }
+
+  function handleCheckoutClick () {
+    console.log("Checked out!")
+  }
+
   return (
     <ul className="card">
       <h4>{card.name}</h4>
       <img src={card.image} alt={card.name} />
             <p>Description: {card.description}</p>
       <p>Price: {card.price} </p>
-      <button>Add To Cart</button>
+      <button onClick={handleAddToCartClick}>Add To Cart</button>
       <Link to="/checkout">
-        <button>Checkout</button>
+        <button onClick={handleCheckoutClick}>Checkout</button>
       </Link>
-      {/* {stadium.attended ? (
-        <button onClick={handleButtonClick}>Crossed off the List</button>
-      ) : (
-        <button onClick={handleButtonClick}>I've Been There!</button>
-      )} */}
     </ul>
   );
 }
