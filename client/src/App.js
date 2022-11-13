@@ -13,6 +13,7 @@ import CheckoutForm from "./CheckoutForm";
 function App() {
   const [user, setUser] = useState({});
   const [cards, setCards] = useState([]);
+  const [cart, setCart] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [renovations, setRenovations] = useState([]);
   const [errors, setErrors] = useState([]);
@@ -26,18 +27,20 @@ function App() {
   }, []);
 
   useEffect(() => {
+    fetch("/mycart").then((r) => {
+      if (r.ok) {
+        r.json().then((cart) => setCart(cart));
+      }
+    });
+  }, []);
+
+  console.log(cart)
+
+  useEffect(() => {
     fetch("/cards")
       .then((r) => r.json())
       .then((card) => setCards(card));
   }, {});
-
-  useEffect(() => {
-    fetch("/renovations")
-      .then((r) => r.json())
-      .then((renovation) => setRenovations(renovation));
-  }, []);
-
-  console.log(user.avatar)
 
   const cardsToDisplay = cards.filter((card) => card.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
@@ -87,7 +90,7 @@ function App() {
           <Account user={user} avatar={user.avatar} />
         </Route>
         <Route exact path='/cards/:genre'>
-          <Genre searchTerm={searchTerm} setSearchTerm={setSearchTerm} cardsToDisplay={cardsToDisplay} setCards={setCards} />
+          <Genre cart={cart} searchTerm={searchTerm} setSearchTerm={setSearchTerm} cardsToDisplay={cardsToDisplay} setCards={setCards} />
         </Route>
         <Route exact path='/checkout'>
           <CheckoutForm />

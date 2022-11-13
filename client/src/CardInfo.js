@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom'
 
-function CardInfo({ card }) {
+function CardInfo({ cart, card, handleCheckoutClick }) {
 
 //   function handleButtonClick() {
 //     fetch(`http://localhost:3000/stadiums/${stadium.id}`, {
@@ -17,13 +17,26 @@ function CardInfo({ card }) {
 //       .then((updatedItem) => handleAttendanceClick(updatedItem));
 // }
 
-  function handleAddToCartClick() {
-    console.log("Added to Cart!")
-  }
+// function handleAddToCartClick() {
+//   console.log(card)
+//   console.log(card.id)
+// }
 
-  function handleCheckoutClick () {
-    console.log("Checked out!")
-  }
+function handleAddToCartClick() {
+  fetch("/line_items", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      card_id: card.id,
+      cart_id: 1,
+      quantity: 1,
+    }),
+  })
+    .then((r) => r.json())
+    .then((newLineItem) => console.log(newLineItem));
+}
 
   return (
     <ul className="card">

@@ -5,6 +5,7 @@ function Account({ user, avatar }) {
 
   const [errors, setErrors] = useState([]);
   console.log(user.user)
+  console.log(user)
 
   // if (!user) return (
   //   <div>
@@ -14,7 +15,7 @@ function Account({ user, avatar }) {
   // )
   return (
     <div>
-      Welcome Home {user.user.first_name} {user.user.last_name}!
+      Welcome Home {user?.user?.first_name} {user?.user?.last_name}!
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import CardInfo from "./CardInfo";
 
-function CardList({ filteredCards, cardsToDisplay, setCards }) {
+function CardList({ cart, filteredCards, cardsToDisplay, setCards }) {
 
   // function handleAttendanceClick(updatedItem) {
   //   const updatedStadiums = stadiumsToDisplay.map((stadium) => {
@@ -13,6 +13,12 @@ function CardList({ filteredCards, cardsToDisplay, setCards }) {
   //   });
   //   setStadiums(updatedStadiums);
   // }
+ 
+
+
+  function handleCheckoutClick () {
+    console.log("Checked out!")
+  }
 
   return (
     <ul className="cards">
@@ -20,7 +26,8 @@ function CardList({ filteredCards, cardsToDisplay, setCards }) {
       <CardInfo
         key={card.id}
         card={card}
-        // handleAttendanceClick={handleAttendanceClick}
+        cart={cart}
+        handleCheckoutClick={handleCheckoutClick}
       />
       )}
     </ul>

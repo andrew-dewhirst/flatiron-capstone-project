@@ -1,7 +1,7 @@
 class LineItemsController < ApplicationController
-  include CurrentCart
-  before_action :set_line_item, only: [:show, :edit, :update, :destroy]
-  before_action :set_cart, only: [:create]
+  # include CurrentCart
+  # before_action :set_line_item, only: [:show, :edit, :update, :destroy]
+  # before_action :set_cart, only: [:create]
 
   def index
     line_items = LineItem.all
@@ -40,8 +40,9 @@ class LineItemsController < ApplicationController
   # end
 
   def create
-    card = Card.find(params[:id])
-    line_item = card.line_item.create!(line_item_params)
+    card = Card.find(params[:card_id])
+    line_item = card.line_items.create!(line_item_params)
+    # card = Card.find_by(id: session[:user_id])
     render json: line_item, status: :created
   end
 

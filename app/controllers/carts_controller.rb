@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
-  rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
-  before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  # rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
+  # before_action :set_cart, only: [:show, :edit, :update, :destroy]
 
   # GET /carts
   # GET /carts.json
@@ -12,11 +12,30 @@ class CartsController < ApplicationController
   # GET /carts/1
   # GET /carts/1.json
   def show
+    # user = User.find_by(id: session[:user_id])
+    # cart = Cart.create!(user_id: user.id, has_converted: false)
+    # render json: user
+    user = User.find_by(id: session[:user_id])
+    if user
+      avatar = rails_blob_path(user.avatar)
+      render json: { user: user, avatar: avatar }, status: :created
+    else
+      render json: { error: "Invalid username or password" }, status: :unauthorized
+    end
   end
 
   # GET /carts/new
   def new
-    @cart = Cart.new
+    # user = User.find_by(id: session[:user_id])
+    # cart = Cart.create!(user_id: user.id, has_converted: false)
+    # render json: user
+    user = User.find_by(id: session[:user_id])
+    active_cart = user.carts
+    if user
+      render json: active_cart, status: :created
+    else
+      render json: { error: "Invalid username or password" }, status: :unauthorized
+    end
   end
 
   # GET /carts/1/edit
