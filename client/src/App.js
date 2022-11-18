@@ -7,12 +7,14 @@ import RenovationList from "./RenovationList";
 import NewRenovation from "./NewRenovation";
 import MyRenovation from "./MyRenovation";
 import Account from "./Account";
+import Cart from "./Cart";
 import Genre from "./Genre";
 import CheckoutForm from "./CheckoutForm";
 
 function App() {
   const [user, setUser] = useState({});
   const [cards, setCards] = useState([]);
+  const [lineItems, setLineItems] = useState([]);
   const [cart, setCart] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [renovations, setRenovations] = useState([]);
@@ -34,7 +36,13 @@ function App() {
     });
   }, []);
 
-  console.log(cart)
+  useEffect(() => {
+    fetch("/line_items").then((r) => {
+      if (r.ok) {
+        r.json().then((lineItems) => setLineItems(lineItems));
+      }
+    });
+  }, []);
 
   useEffect(() => {
     fetch("/cards")
@@ -56,9 +64,9 @@ function App() {
     setRenovations([...renovations, newRenovation])
   };
 
-  function handleRenovationDelete(deletedRenovation) {
-    const updatedRenovations = renovations.filter((renovation) => renovation.id !== deletedRenovation)
-    setRenovations(updatedRenovations);
+  function handleLineItemDelete(deletedLineItem) {
+    const updatedLineItems = lineItems.filter((lineItem) => lineItem.id !== deletedLineItem)
+    setLineItems(updatedLineItems);
   }
 
   function handleUpdateRenovation(updatedRenovation) {
@@ -82,6 +90,7 @@ function App() {
       <button type="button" onClick={handleLogoutClick}>
           Logout
      </button>
+     <Cart lineItems={lineItems}/>
       <Switch>
         <Route exact path="/">
             <Home user={user}/>
@@ -90,7 +99,7 @@ function App() {
           <Account user={user} avatar={user.avatar} />
         </Route>
         <Route exact path='/cards/:genre'>
-          <Genre cart={cart} searchTerm={searchTerm} setSearchTerm={setSearchTerm} cardsToDisplay={cardsToDisplay} setCards={setCards} />
+          <Genre cart={cart} lineItems={lineItems} searchTerm={searchTerm} setSearchTerm={setSearchTerm} cardsToDisplay={cardsToDisplay} setCards={setCards} handleLineItemDelete={handleLineItemDelete} />
         </Route>
         <Route exact path='/checkout'>
           <CheckoutForm />
@@ -100,9 +109,6 @@ function App() {
         </Route>
         <Route exact path="/new_renovation">
           <NewRenovation user={user} renovations={renovations} handleNewRenovation={handleNewRenovation} />
-        </Route>
-        <Route exact path="/my_renovations">
-          <MyRenovation user={user} renovations={renovations} handleRenovationDelete={handleRenovationDelete} handleUpdateRenovation={handleUpdateRenovation} />
         </Route>
       </Switch>
     </div>

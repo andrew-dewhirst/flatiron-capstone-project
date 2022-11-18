@@ -30,11 +30,12 @@ class CartsController < ApplicationController
     # cart = Cart.create!(user_id: user.id, has_converted: false)
     # render json: user
     user = User.find_by(id: session[:user_id])
-    active_cart = user.carts
-    if user
-      render json: active_cart, status: :created
+    active_cart = user.carts.where(has_converted: false).first
+    if !active_cart
+      new_cart = Cart.create!(user_id: user.id, has_converted: false)
+      render json: new_cart, status: :created
     else
-      render json: { error: "Invalid username or password" }, status: :unauthorized
+      render json: active_cart
     end
   end
 

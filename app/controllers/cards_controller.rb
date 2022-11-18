@@ -21,7 +21,7 @@ class CardsController < ApplicationController
 
   def destroy
     card = Card.find(params[:id])
-    card.destroy
+    card.line_items.destroy_all
   end
 
   private

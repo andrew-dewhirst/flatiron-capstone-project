@@ -60,15 +60,9 @@ class LineItemsController < ApplicationController
     end
   end
 
-  # DELETE /line_items/1
-  # DELETE /line_items/1.json
   def destroy
-    @cart = Cart.find(session[:cart_id])
-    @line_item.destroy
-    respond_to do |format|
-      format.html { redirect_to cart_path(@cart), notice: 'Item successfully removed.' }
-      format.json { head :no_content }
-    end
+    card = Card.find(params[:id])
+    card.line_items.destroy
   end
 
   private
