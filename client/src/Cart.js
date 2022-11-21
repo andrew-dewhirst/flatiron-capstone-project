@@ -8,7 +8,8 @@ import RemoveIcon from "@material-ui/icons/Remove";
 
 function Cart({ lineItems }) {
 
-  const cartIconCount = lineItems.length
+  console.log(lineItems)
+  const cartIconCount = lineItems?.length
   const [itemCount, setItemCount] = useState(cartIconCount);
 
   console.log(cartIconCount)
@@ -17,7 +18,7 @@ function Cart({ lineItems }) {
   return (
     <div style={{ display: "block", padding: 30 }}>
       <div>
-        <Badge color="secondary" badgeContent={itemCount}>
+        <Badge color="secondary" badgeContent={lineItems.length}>
           <ShoppingCartIcon />{" "}
         </Badge>
         <ButtonGroup>

@@ -21,7 +21,10 @@ class CardsController < ApplicationController
 
   def destroy
     card = Card.find(params[:id])
-    card.line_items.destroy_all
+    user = User.find_by(id: session[:user_id])
+    active_cart = user.carts.where(has_converted: false).first
+    cart_contents = card.line_items.where(cart_id: active_cart.id)
+    cart_contents.destroy_all
   end
 
   private

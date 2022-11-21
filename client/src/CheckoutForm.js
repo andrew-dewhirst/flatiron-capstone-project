@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import GooglePayButton from "@google-pay/button-react";
 // import "./style.css";
 
-function CheckoutForm() {
+function CheckoutForm({ user, cards }) {
+  console.log(user.line_items)
+  console.log(cards)
+
+  cards.map((card) => console.log(card.price))
+  user.line_items.map((lineItem) => console.log(lineItem.card_id))
+
   const paymentRequest = {
     apiVersion: 2,
     apiVersionMinor: 0,

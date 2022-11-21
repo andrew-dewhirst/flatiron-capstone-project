@@ -12,7 +12,7 @@ import Genre from "./Genre";
 import CheckoutForm from "./CheckoutForm";
 
 function App() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const [cards, setCards] = useState([]);
   const [lineItems, setLineItems] = useState([]);
   const [cart, setCart] = useState({});
@@ -24,22 +24,6 @@ function App() {
     fetch("/me").then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user));
-      }
-    });
-  }, []);
-
-  useEffect(() => {
-    fetch("/mycart").then((r) => {
-      if (r.ok) {
-        r.json().then((cart) => setCart(cart));
-      }
-    });
-  }, []);
-
-  useEffect(() => {
-    fetch("/line_items").then((r) => {
-      if (r.ok) {
-        r.json().then((lineItems) => setLineItems(lineItems));
       }
     });
   }, []);
@@ -60,11 +44,11 @@ function App() {
     });
   }
 
-  function handleNewRenovation(newRenovation) {
-    setRenovations([...renovations, newRenovation])
+  function handleAddLineItem(newLineItem) {
+    setLineItems([...lineItems, newLineItem])
   };
 
-  function handleLineItemDelete(deletedLineItem) {
+  function handleRemoveLineItem(deletedLineItem) {
     const updatedLineItems = lineItems.filter((lineItem) => lineItem.id !== deletedLineItem)
     setLineItems(updatedLineItems);
   }
@@ -99,17 +83,18 @@ function App() {
           <Account user={user} avatar={user.avatar} />
         </Route>
         <Route exact path='/cards/:genre'>
-          <Genre cart={cart} lineItems={lineItems} searchTerm={searchTerm} setSearchTerm={setSearchTerm} cardsToDisplay={cardsToDisplay} setCards={setCards} handleLineItemDelete={handleLineItemDelete} />
+          <Genre cart={user.cart} lineItems={user.line_items} searchTerm={searchTerm} setSearchTerm={setSearchTerm} cardsToDisplay={cardsToDisplay} setCards={setCards} handleAddLineItem={handleAddLineItem}/>
+          {/* handleLineItemDelete={handleLineItemDelete} */}
         </Route>
         <Route exact path='/checkout'>
-          <CheckoutForm />
+          <CheckoutForm user={user} cards={cards}/>
         </Route>
         <Route exact path="/renovations">
           <RenovationList renovations={renovations} user={user} handleUpdateRenovation={handleUpdateRenovation} />
         </Route>
-        <Route exact path="/new_renovation">
+        {/* <Route exact path="/new_renovation">
           <NewRenovation user={user} renovations={renovations} handleNewRenovation={handleNewRenovation} />
-        </Route>
+        </Route> */}
       </Switch>
     </div>
   );

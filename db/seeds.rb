@@ -22,6 +22,22 @@ andrew.avatar.attach(
   content_type: 'application/png'
 )
 
+john = User.create(
+  first_name: "John",
+  last_name: "Doe",
+  email: "john@example.com",
+  birthday: "07/02/2000",
+  username: "jdoe",
+  password: "password",
+  password_confirmation: "password"
+  )
+
+  john.avatar.attach(
+    io: File.open('./public/avatars/kid_1.png'),
+    filename: 'kid_1.png',
+    content_type: 'application/png'
+  )
+
 Card.create(
   name: "Charizard",
   description: "Base set - 4/102: Holographic Charizard from the original Pokemon card set",

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom'
 
-function CardInfo({ cart, lineItems, card, handleCheckoutClick, handleLineItemDelete }) {
+function CardInfo({ cart, lineItems, card, handleCheckoutClick, handleAddLineItem, handleLineItemDelete }) {
 
 //   function handleButtonClick() {
 //     fetch(`http://localhost:3000/stadiums/${stadium.id}`, {
@@ -22,6 +22,8 @@ function CardInfo({ cart, lineItems, card, handleCheckoutClick, handleLineItemDe
 //   console.log(card.id)
 // }
 
+console.log(cart)
+
 function handleAddToCartClick() {
   fetch("/line_items", {
     method: "POST",
@@ -35,7 +37,7 @@ function handleAddToCartClick() {
     }),
   })
     .then((r) => r.json())
-    .then((newLineItem) => console.log(newLineItem));
+    .then((newLineItem) => handleAddLineItem(newLineItem));
 }
 
 function handleRemoveFromCartClick() {
@@ -43,7 +45,8 @@ function handleRemoveFromCartClick() {
     method: "DELETE",
   }).then((r) => {
     if (r.ok) {
-      handleLineItemDelete(card.id);
+      console.log(card.id);
+      // handleLineItemDelete(card.id);
     }
   });
 }
