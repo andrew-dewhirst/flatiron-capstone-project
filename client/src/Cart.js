@@ -10,7 +10,7 @@ function Cart({ lineItems, user }) {
 
   console.log(user.cart)
 
-  const cartIconCount = lineItems.filter((lineItem) => lineItem.cart_id == user.cart.id).length
+  const cartIconCount = lineItems.filter((lineItem) => lineItem.cart_id == user?.cart?.id).length
 
   console.log(cartIconCount)
 

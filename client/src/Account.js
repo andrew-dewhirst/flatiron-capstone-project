@@ -4,7 +4,7 @@ import Login from "./Login";
 function Account({ user, avatar }) {
 
   const [errors, setErrors] = useState([]);
-  console.log(user.all_carts)
+  console.log(user.purchases)
   console.log(user)
 
   // if (!user) return (

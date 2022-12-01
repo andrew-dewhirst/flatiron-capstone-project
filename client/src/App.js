@@ -10,6 +10,7 @@ import Account from "./Account";
 import Cart from "./Cart";
 import Genre from "./Genre";
 import CheckoutForm from "./CheckoutForm";
+import AppBar from "./AppBar";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -77,6 +78,7 @@ function App() {
   return (
     <div>
       <NavBar user={user} setUser={setUser} />
+      <AppBar />
       <button type="button" onClick={handleLogoutClick}>
           Logout
      </button>
