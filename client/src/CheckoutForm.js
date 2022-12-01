@@ -2,19 +2,20 @@ import React, { useState } from "react";
 import GooglePayButton from "@google-pay/button-react";
 // import "./style.css";
 
-function CheckoutForm({ user, cards }) {
+function CheckoutForm({ user, cards, cart }) {
 
-  const cartItems = user.line_items.filter((lineItem) => lineItem.cart_id == user.cart.id)
+  const cartItems = user?.line_items?.filter((lineItem) => lineItem.cart_id == user.cart.id)
   console.log(cartItems)
-  
-  const cartInfo = cartItems.map((item) => item.card_id )
-  console.log(cartInfo)
+
+  console.log(cards)
+
+  console.log(user.cart.id)
 
   const cartTotalPerCard = (cards.map((card) => card.line_items.filter((lineItem) => lineItem.cart_id == user.cart.id).length*card.price))
 
   console.log(cartTotalPerCard)
 
-  const cartTotal =  cartTotalPerCard?.reduce((result,price)=> result+price);
+  const cartTotal =  cartTotalPerCard?.reduce((result,price)=> result+price, 0);
   console.log(cartTotal)
 
   
@@ -58,9 +59,25 @@ function CheckoutForm({ user, cards }) {
 
   const isTop = window === window.top;
 
+
+    function handlePaymentClick() {
+    fetch(`http://localhost:3000/carts/${cart.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        has_converted: !cart.has_converted,
+      }),
+   })
+      .then((r) => r.json())
+      .then((updatedCart) => console.log(updatedCart));
+}
+
   return (
     <div>
-      <h3>{cartTotal}</h3>
+      <h3>Products: </h3>
+      <h3>Total Owed: ${cartTotal}.00</h3>
       <div className="demo">
         <GooglePayButton
           environment="TEST"
@@ -68,6 +85,7 @@ function CheckoutForm({ user, cards }) {
           buttonType={buttonType}
           buttonSizeMode={buttonSizeMode}
           paymentRequest={paymentRequest}
+          onClick = {handlePaymentClick}
           onLoadPaymentData={paymentRequest => {
             console.log("load payment data", paymentRequest);
           }}

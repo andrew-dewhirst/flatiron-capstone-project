@@ -16,9 +16,6 @@ function CardList({ cart, lineItems, filteredCards, cardsToDisplay, setCards, ha
  
 
 
-  function handleCheckoutClick ({handleLineItemDelete}) {
-    console.log("Checked out!")
-  }
 
   return (
     <ul className="cards">
@@ -28,7 +25,6 @@ function CardList({ cart, lineItems, filteredCards, cardsToDisplay, setCards, ha
         card={card}
         cart={cart}
         lineItems={card.line_items}
-        handleCheckoutClick={handleCheckoutClick}
         handleAddLineItem={handleAddLineItem}
         handleLineItemDelete={handleLineItemDelete}
       />

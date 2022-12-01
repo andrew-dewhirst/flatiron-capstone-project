@@ -45,8 +45,7 @@ function handleRemoveFromCartClick() {
     method: "DELETE",
   }).then((r) => {
     if (r.ok) {
-      console.log(card.id);
-      // handleLineItemDelete(card.id);
+      handleLineItemDelete(card.id);
     }
   });
 }
@@ -59,9 +58,6 @@ function handleRemoveFromCartClick() {
       <p>Price: {card.price} </p>
       <button onClick={handleAddToCartClick}>Add To Cart</button>
       <button onClick={handleRemoveFromCartClick}>Remove From Cart</button>
-      <Link to="/checkout">
-        <button onClick={handleCheckoutClick}>Checkout</button>
-      </Link>
     </ul>
   );
 }

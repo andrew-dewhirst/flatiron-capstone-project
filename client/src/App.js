@@ -32,7 +32,13 @@ function App() {
     fetch("/cards")
       .then((r) => r.json())
       .then((card) => setCards(card));
-  }, {});
+  }, []);
+
+  useEffect(() => {
+    fetch("/line_items")
+    .then((r) => r.json())
+    .then((lineItem) => setLineItems(lineItem))
+  }, [])
 
   const cardsToDisplay = cards.filter((card) => card.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
@@ -48,7 +54,7 @@ function App() {
     setLineItems([...lineItems, newLineItem])
   };
 
-  function handleRemoveLineItem(deletedLineItem) {
+  function handleLineItemDelete(deletedLineItem) {
     const updatedLineItems = lineItems.filter((lineItem) => lineItem.id !== deletedLineItem)
     setLineItems(updatedLineItems);
   }
@@ -74,7 +80,7 @@ function App() {
       <button type="button" onClick={handleLogoutClick}>
           Logout
      </button>
-     <Cart lineItems={lineItems}/>
+     <Cart lineItems={lineItems} user={user}/>
       <Switch>
         <Route exact path="/">
             <Home user={user}/>
@@ -83,11 +89,11 @@ function App() {
           <Account user={user} avatar={user.avatar} />
         </Route>
         <Route exact path='/cards/:genre'>
-          <Genre cart={user.cart} lineItems={user.line_items} searchTerm={searchTerm} setSearchTerm={setSearchTerm} cardsToDisplay={cardsToDisplay} setCards={setCards} handleAddLineItem={handleAddLineItem}/>
-          {/* handleLineItemDelete={handleLineItemDelete} */}
+          <Genre cart={user.cart} lineItems={user.line_items} searchTerm={searchTerm} setSearchTerm={setSearchTerm} cardsToDisplay={cardsToDisplay} setCards={setCards} handleAddLineItem={handleAddLineItem} handleLineItemDelete={handleLineItemDelete} />
+          
         </Route>
         <Route exact path='/checkout'>
-          <CheckoutForm user={user} cards={cards}/>
+          <CheckoutForm user={user} cards={cards} cart={user.cart}/>
         </Route>
         <Route exact path="/renovations">
           <RenovationList renovations={renovations} user={user} handleUpdateRenovation={handleUpdateRenovation} />

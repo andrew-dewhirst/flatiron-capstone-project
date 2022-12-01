@@ -6,39 +6,25 @@ import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 
-function Cart({ lineItems }) {
+function Cart({ lineItems, user }) {
 
-  console.log(lineItems)
-  const cartIconCount = lineItems?.length
-  const [itemCount, setItemCount] = useState(cartIconCount);
+  console.log(user.cart)
+
+  const cartIconCount = lineItems.filter((lineItem) => lineItem.cart_id == user.cart.id).length
 
   console.log(cartIconCount)
-  console.log(itemCount)
+
+
+  function handleCheckoutClick(){
+    window.location.href='/checkout'
+  }
 
   return (
     <div style={{ display: "block", padding: 30 }}>
       <div>
-        <Badge color="secondary" badgeContent={lineItems.length}>
-          <ShoppingCartIcon />{" "}
+        <Badge color="secondary" badgeContent={cartIconCount}>
+          <ShoppingCartIcon onClick={handleCheckoutClick} />{" "}
         </Badge>
-        <ButtonGroup>
-          <Button
-            onClick={() => {
-              setItemCount(Math.max(itemCount - 1, 0));
-            }}
-          >
-            {" "}
-            <RemoveIcon fontSize="small" />
-          </Button>
-          <Button
-            onClick={() => {
-              setItemCount(itemCount + 1);
-            }}
-          >
-            {" "}
-            <AddIcon fontSize="small" />
-          </Button>
-        </ButtonGroup>
       </div>
     </div>
   );

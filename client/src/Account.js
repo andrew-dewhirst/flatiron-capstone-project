@@ -4,9 +4,8 @@ import Login from "./Login";
 function Account({ user, avatar }) {
 
   const [errors, setErrors] = useState([]);
-  console.log(user.user)
+  console.log(user.all_carts)
   console.log(user)
-  const [itemCount, setItemCount] = useState(0);
 
   // if (!user) return (
   //   <div>
@@ -17,6 +16,7 @@ function Account({ user, avatar }) {
   return (
     <div style={{ display: "block", padding: 30 }}>
       <h3>Welcome Home {user?.user?.first_name} {user?.user?.last_name}!</h3>
+      <h4>Recent Purchases:</h4>
     </div>
   );
 }

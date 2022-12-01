@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     if user
       if active_cart
         avatar = rails_blob_path(user.avatar)
-        render json: { user: user, avatar: avatar, cart: active_cart, line_items: active_cart.line_items }, status: :created
+        render json: { user: user, avatar: avatar, cart: active_cart, line_items: active_cart.line_items, all_carts: user.carts }, status: :created
       else
         new_cart = Cart.create!(user_id: user.id, has_converted: false)
         render json: {user: user, avatar: avatar, cart: new_cart}
