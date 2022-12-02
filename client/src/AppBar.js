@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useHistory } from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,12 +14,15 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['Pokemon', 'Baseball', 'Basketball', 'Football', 'Hockey'];
+const settings = ['Profile', 'Logout'];
 
 function ResponsiveAppBar() {
+  let history = useHistory();
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -34,6 +38,20 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleGoToGenre = (event) => {
+    event.preventDefault();
+    let genre = event.target.innerText;
+    history.push(`/cards/${genre}`);
+    handleCloseNavMenu();
+  }
+
+  const handleGoToProfile = (event) => {
+    event.preventDefault();
+    let settings = event.target.innerText;
+    history.push(`/${settings}`);
+    console.log(event.target.innerText)
+  }
 
   return (
     <AppBar position="static">
@@ -88,7 +106,7 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={handleGoToGenre}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -148,7 +166,7 @@ function ResponsiveAppBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={handleGoToProfile}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
-import NavBar from "./NavBar";
+import AppBar from "./AppBar";
 import Login from "./Login";
 import Home from "./Home";
 import RenovationList from "./RenovationList";
@@ -10,7 +10,7 @@ import Account from "./Account";
 import Cart from "./Cart";
 import Genre from "./Genre";
 import CheckoutForm from "./CheckoutForm";
-import AppBar from "./AppBar";
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -70,14 +70,12 @@ function App() {
   if (!user) return (
     <div>
       <h3>{errors}</h3>
-      <NavBar />
       <Login onLogin={setUser} setErrors={setErrors} />;
     </div>
   )
 
   return (
     <div>
-      <NavBar user={user} setUser={setUser} />
       <AppBar />
       <button type="button" onClick={handleLogoutClick}>
           Logout
@@ -87,7 +85,7 @@ function App() {
         <Route exact path="/">
             <Home user={user}/>
           </Route>
-        <Route exact path="/myaccount">
+        <Route exact path="/profile">
           <Account user={user} avatar={user.avatar} />
         </Route>
         <Route exact path='/cards/:genre'>
