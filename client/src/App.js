@@ -7,7 +7,6 @@ import RenovationList from "./RenovationList";
 import NewRenovation from "./NewRenovation";
 import MyRenovation from "./MyRenovation";
 import Account from "./Account";
-import Cart from "./Cart";
 import Genre from "./Genre";
 import CheckoutForm from "./CheckoutForm";
 
@@ -51,6 +50,7 @@ function App() {
     });
   }
 
+
   function handleAddLineItem(newLineItem) {
     setLineItems([...lineItems, newLineItem])
   };
@@ -76,11 +76,10 @@ function App() {
 
   return (
     <div>
-      <AppBar />
+      <AppBar user={user} lineItems={lineItems}/>
       <button type="button" onClick={handleLogoutClick}>
           Logout
      </button>
-     <Cart lineItems={lineItems} user={user}/>
       <Switch>
         <Route exact path="/">
             <Home user={user}/>

@@ -12,17 +12,20 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import ScoreboardIcon from '@mui/icons-material/Scoreboard';
+import Badge from "@material-ui/core/Badge";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-const pages = ['Pokemon', 'Baseball', 'Basketball', 'Football', 'Hockey'];
-const settings = ['Profile', 'Logout'];
+const pages = ['Pokemon', 'Baseball', 'Basketball', 'Football', 'Hockey']; 
+const settings = ['Profile', 'Checkout'];
 
-function ResponsiveAppBar() {
+function ResponsiveAppBar({user, lineItems}) {
   let history = useHistory();
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   
+  const cartIconCount = lineItems.filter((lineItem) => lineItem.cart_id == user?.cart?.id).length
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -50,21 +53,28 @@ function ResponsiveAppBar() {
     event.preventDefault();
     let settings = event.target.innerText;
     history.push(`/${settings}`);
-    console.log(event.target.innerText)
+    handleCloseUserMenu();
+  }
+
+  const handleCheckoutClick = () => {
+    history.push('/checkout');
   }
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+        <Badge color="secondary" badgeContent={cartIconCount} overlap="circular" style={{  transform: 'translate(25px, -10px)'}}>
+        </Badge>
+        <ShoppingCartIcon onClick={handleCheckoutClick} sx={{ display: { xs: 'flex', md: 'flex' }, mr: 2 }} />
+        
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/home"
             sx={{
-              mr: 2,
+              mr: 1,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
@@ -73,7 +83,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Card Collector Emporium
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -112,12 +122,12 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <ScoreboardIcon sx={{ display: { xs: 'flex', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="/home"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -129,13 +139,13 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Card Collector Emporium
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={handleGoToGenre}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
@@ -146,7 +156,7 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt={user?.user?.first_name} src={`http://localhost:3000/${user.avatar}`} />
               </IconButton>
             </Tooltip>
             <Menu
