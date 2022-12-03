@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import AppBar from "./AppBar";
 import Login from "./Login";
 import Home from "./Home";
@@ -9,6 +9,8 @@ import MyRenovation from "./MyRenovation";
 import Account from "./Account";
 import Genre from "./Genre";
 import CheckoutForm from "./CheckoutForm";
+import SignIn from "./SignIn";
+import SignUp from "./SignUp";
 
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [renovations, setRenovations] = useState([]);
   const [errors, setErrors] = useState([]);
+
+  let history = useHistory();
 
   useEffect(() => {
     fetch("/me").then((r) => {
@@ -47,6 +51,7 @@ function App() {
       if (r.ok) {
         setUser(null);
       }
+      history.push(`/`);
     });
   }
 
@@ -70,6 +75,15 @@ function App() {
   if (!user) return (
     <div>
       <h3>{errors}</h3>
+      <AppBar user={user} lineItems={lineItems}/>
+      <Switch>
+        <Route exact path="/">
+          <SignIn onLogin={setUser} setErrors={setErrors} />;
+        </Route>
+        <Route exact path="/signup">
+          <SignUp onLogin={setUser} setErrors={setErrors} />
+        </Route>
+      </Switch>
       <Login onLogin={setUser} setErrors={setErrors} />;
     </div>
   )

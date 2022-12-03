@@ -8,8 +8,6 @@ function Genre( {cart, lineItems, searchTerm, setSearchTerm, cardsToDisplay, set
 
   const filteredCards = cardsToDisplay.filter((card) => card.genre.toLowerCase() === params.genre.toLowerCase())
 
-  console.log(lineItems.length)
-
   return (
     <div>
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
