@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 import AppBar from "./AppBar";
-import Login from "./Login";
 import Home from "./Home";
 import RenovationList from "./RenovationList";
 import NewRenovation from "./NewRenovation";
@@ -84,16 +85,17 @@ function App() {
           <SignUp onLogin={setUser} setErrors={setErrors} />
         </Route>
       </Switch>
-      <Login onLogin={setUser} setErrors={setErrors} />;
     </div>
   )
 
   return (
     <div>
       <AppBar user={user} lineItems={lineItems}/>
-      <button type="button" onClick={handleLogoutClick}>
+      <Box display='flex' justifyContent='flex-end'>
+        <Button variant="contained" href="/" onClick={handleLogoutClick}>
           Logout
-     </button>
+        </Button>
+      </Box>
       <Switch>
         <Route exact path="/">
             <Home user={user}/>

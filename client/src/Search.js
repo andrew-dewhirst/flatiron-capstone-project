@@ -1,4 +1,5 @@
 import React from "react";
+import TextField from '@mui/material/TextField';
 
 function Search({ searchTerm, setSearchTerm }) {
 
@@ -7,16 +8,7 @@ function Search({ searchTerm, setSearchTerm }) {
   }
 
   return (
-    <div className="searchbar">
-      <label htmlFor="search">Search Cards:</label>
-      <input
-        value={searchTerm}
-        type="text"
-        id="search"
-        placeholder="Type a card to search..."
-        onChange={handleSearch}
-      />
-    </div>
+    <TextField id="outlined-basic" label="Type a card to search..." variant="outlined" value={searchTerm} onChange={handleSearch} />
   );
 }
 
