@@ -12,23 +12,24 @@ class CartsController < ApplicationController
   # GET /carts/1
   # GET /carts/1.json
   def show
-    # user = User.find_by(id: session[:user_id])
-    # cart = Cart.create!(user_id: user.id, has_converted: false)
-    # render json: user
-    user = User.find_by(id: session[:user_id])
-    if user
-      avatar = rails_blob_path(user.avatar)
-      render json: { user: user, avatar: avatar }, status: :created
+    active_cart = Cart.find_by(id: params[:id])
+    if active_cart
+      render json: active_cart.cards
     else
-      render json: { error: "Invalid username or password" }, status: :unauthorized
+      render json: { error: "Cart not found"}, status: :not_found
     end
   end
+  #   user = User.find_by(id: session[:user_id])
+  #   active_cart = user.carts.where(has_converted: false).first
+  #   if user
+  #     render json: active_cart.cards, status: :created
+  #   else
+  #     render json: { error: "Invalid username or password" }, status: :unauthorized
+  #   end
+  # end
 
   # GET /carts/new
   def new
-    # user = User.find_by(id: session[:user_id])
-    # cart = Cart.create!(user_id: user.id, has_converted: false)
-    # render json: user
     user = User.find_by(id: session[:user_id])
     active_cart = user.carts.where(has_converted: false).first
     if !active_cart

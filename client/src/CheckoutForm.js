@@ -1,22 +1,21 @@
 import React, { useState } from "react";
 import GooglePayButton from "@google-pay/button-react";
-// import "./style.css";
 
 function CheckoutForm({ user, cards, cart }) {
 
-  const cartItems = user?.line_items?.filter((lineItem) => lineItem.cart_id == user.cart.id)
-  console.log(cartItems)
+  // const cartItems = user?.line_items?.filter((lineItem) => lineItem.cart_id == user.cart.id)
+  // console.log(cartItems)
 
-  console.log(cards)
+  // console.log(cards)
 
-  console.log(user.cart.id)
+  // console.log(user.cart.id)
 
-  const cartTotalPerCard = (cards.map((card) => card.line_items.filter((lineItem) => lineItem.cart_id == user.cart.id).length*card.price))
+  // const cartTotalPerCard = (cards.map((card) => card.line_items.filter((lineItem) => lineItem.cart_id == user.cart.id).length*card.price))
 
-  console.log(cartTotalPerCard)
+  // console.log(cartTotalPerCard)
 
-  const cartTotal =  cartTotalPerCard?.reduce((result,price)=> result+price, 0);
-  console.log(cartTotal)
+  // const cartTotal =  cartTotalPerCard?.reduce((result,price)=> result+price, 0);
+  // console.log(cartTotal)
 
   
 
@@ -76,8 +75,6 @@ function CheckoutForm({ user, cards, cart }) {
 
   return (
     <div>
-      <h3>Products: </h3>
-      <h3>Total Owed: ${cartTotal}.00</h3>
       <div className="demo">
         <GooglePayButton
           environment="TEST"

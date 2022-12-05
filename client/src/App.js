@@ -9,6 +9,7 @@ import NewRenovation from "./NewRenovation";
 import MyRenovation from "./MyRenovation";
 import Account from "./Account";
 import Genre from "./Genre";
+import Checkout from "./Checkout";
 import CheckoutForm from "./CheckoutForm";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
@@ -109,6 +110,7 @@ function App() {
         </Route>
         <Route exact path='/checkout'>
           <CheckoutForm user={user} cards={cards} cart={user.cart}/>
+          <Checkout user={user} cart={user.cart}/>
         </Route>
         <Route exact path="/renovations">
           <RenovationList renovations={renovations} user={user} handleUpdateRenovation={handleUpdateRenovation} />
