@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+
 function Account({ user, avatar }) {
 
   const [errors, setErrors] = useState([]);
@@ -21,3 +22,4 @@ function Account({ user, avatar }) {
 }
 
 export default Account
+

@@ -11,6 +11,9 @@ export default function PaymentForm({ setCardName, setCardNumber, setExpDate, se
       <Typography variant="h6" gutterBottom>
         Payment method
       </Typography>
+      <Typography variant="subtitle2" gutterBottom>
+        Skip to next page if using GooglePay
+      </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <TextField

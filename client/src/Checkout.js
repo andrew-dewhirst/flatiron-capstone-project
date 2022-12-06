@@ -33,7 +33,7 @@ const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
 const theme = createTheme();
 
-export default function Checkout({ user, cart }) {
+export default function Checkout({ user }) {
 
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
@@ -47,18 +47,16 @@ export default function Checkout({ user, cart }) {
   const [cardNumber, setCardNumber] = useState("")
   const [expDate, setExpDate] = useState("")
   const [securityCode, setSecurityCode] = useState("")
-  const [cartTest, setCartTest] = useState([])
+  const [cart, setCart] = useState([])
 
-  console.log(user)
+  console.log(user.cart)
   console.log(cart)
 
   useEffect(() => {
     fetch(`/carts/${user.cart.id}`)
       .then((r) => r.json())
-      .then((cart) => setCartTest(cart));
+      .then((cart) => setCart(cart));
   }, []);
-
-  console.log(cartTest)
 
   function handlePaymentClick() {
     fetch(`http://localhost:3000/carts/${cart.id}`, {
@@ -81,7 +79,7 @@ export default function Checkout({ user, cart }) {
       case 1:
         return <PaymentForm setCardName={setCardName} setCardNumber={setCardNumber} setExpDate={setExpDate} setSecurityCode={setSecurityCode} />;
       case 2:
-        return <Review firstName={firstName} lastName={lastName} address1={address1} address2={address2} city={city} state={state} zip={zip} country={country} cardName={cardName} cardNumber={cardNumber} expDate={expDate} cartTest={cartTest} />;
+        return <Review firstName={firstName} lastName={lastName} address1={address1} address2={address2} city={city} state={state} zip={zip} country={country} cardName={cardName} cardNumber={cardNumber} expDate={expDate} user={user} cart={cart} />;
       default:
         throw new Error('Unknown step');
     }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import CheckoutForm from './CheckoutForm';
+import GooglePayItem from './GooglePayItem';
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -30,7 +30,7 @@ const products = [
   { name: 'Shipping', desc: '', price: 0 },
 ];
 
-export default function Review({ firstName, lastName, address1, address2, city, state, zip, country, cardName, cardNumber, expDate, cartTest }) {
+export default function Review({ firstName, lastName, address1, address2, city, state, zip, country, cardName, cardNumber, expDate, cart }) {
 
   const addresses = [address1, address2, city, state, zip, country];
   const payments = [
@@ -40,7 +40,7 @@ export default function Review({ firstName, lastName, address1, address2, city, 
     { name: 'Expiry date', detail: `${expDate}` },
   ];
 
-  const price = cartTest.map((card) => card.price)
+  const price = cart.map((card) => card.price)
   const cartTotal = price.map(Number)
   const totalPrice = cartTotal.reduce((a,b) => a + b, 0)
 
@@ -51,12 +51,19 @@ export default function Review({ firstName, lastName, address1, address2, city, 
         Order summary
       </Typography>
       <List disablePadding>
-        {cartTest.map((card, index) => (
+        {cart.map((card, index) => (
           <ListItem key={index} sx={{ py: 1, px: 0 }}>
             <ListItemText primary={card.name} secondary={card.description} />
             <Typography variant="body2">${card.price}0</Typography>
           </ListItem>
         ))}
+
+        <ListItem sx={{ py: 1, px: 0 }}>
+          <ListItemText primary="Shipping" />
+          <Typography variant="body2">
+            $0.00
+          </Typography>
+        </ListItem>
 
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
@@ -89,7 +96,7 @@ export default function Review({ firstName, lastName, address1, address2, city, 
               </React.Fragment>
             ))}
           </Grid>
-          <CheckoutForm />
+          <GooglePayItem />
         </Grid>
       </Grid>
     </React.Fragment>

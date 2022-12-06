@@ -1,23 +1,7 @@
 import React, { useState } from "react";
 import GooglePayButton from "@google-pay/button-react";
 
-function CheckoutForm({ user, cards, cart }) {
-
-  // const cartItems = user?.line_items?.filter((lineItem) => lineItem.cart_id == user.cart.id)
-  // console.log(cartItems)
-
-  // console.log(cards)
-
-  // console.log(user.cart.id)
-
-  // const cartTotalPerCard = (cards.map((card) => card.line_items.filter((lineItem) => lineItem.cart_id == user.cart.id).length*card.price))
-
-  // console.log(cartTotalPerCard)
-
-  // const cartTotal =  cartTotalPerCard?.reduce((result,price)=> result+price, 0);
-  // console.log(cartTotal)
-
-  
+function GooglePayItem({ user, cart }) {
 
   const paymentRequest = {
     apiVersion: 2,
@@ -60,7 +44,7 @@ function CheckoutForm({ user, cards, cart }) {
 
 
     function handlePaymentClick() {
-    fetch(`http://localhost:3000/carts/${cart.id}`, {
+    fetch(`http://localhost:3000/carts/${user.cart.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -106,4 +90,4 @@ function CheckoutForm({ user, cards, cart }) {
   );
 }
 
-export default CheckoutForm
+export default GooglePayItem
