@@ -42,7 +42,6 @@ function GooglePayItem({ user, cart }) {
 
   const isTop = window === window.top;
 
-
     function handlePaymentClick() {
     fetch(`http://localhost:3000/carts/${user.cart.id}`, {
       method: "PATCH",
@@ -50,7 +49,7 @@ function GooglePayItem({ user, cart }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        has_converted: !cart.has_converted,
+        has_converted: !user.cart.has_converted,
       }),
    })
       .then((r) => r.json())

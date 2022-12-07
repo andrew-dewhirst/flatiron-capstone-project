@@ -12,6 +12,7 @@ import Genre from "./Genre";
 import Checkout from "./Checkout";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import MyReviewDetail from "./MyReviewDetail";
 
 
 function App() {
@@ -55,7 +56,6 @@ function App() {
       history.push(`/`);
     });
   }
-
 
   function handleAddLineItem(newLineItem) {
     setLineItems([...lineItems, newLineItem])
@@ -104,11 +104,13 @@ function App() {
           <Account user={user} avatar={user.avatar} />
         </Route>
         <Route exact path='/cards/:genre'>
-          <Genre cart={user.cart} lineItems={user.line_items} searchTerm={searchTerm} setSearchTerm={setSearchTerm} cardsToDisplay={cardsToDisplay} setCards={setCards} handleAddLineItem={handleAddLineItem} handleLineItemDelete={handleLineItemDelete} />
-          
+          <Genre cart={user.cart} lineItems={user.line_items} searchTerm={searchTerm} setSearchTerm={setSearchTerm} cardsToDisplay={cardsToDisplay} setCards={setCards} handleAddLineItem={handleAddLineItem} handleLineItemDelete={handleLineItemDelete} /> 
         </Route>
         <Route exact path='/checkout'>
           <Checkout user={user} cart={user.cart}/>
+        </Route>
+        <Route exact path='/reviews/:cardName'>
+          <MyReviewDetail user={user.user} cards={cards} />
         </Route>
         <Route exact path="/renovations">
           <RenovationList renovations={renovations} user={user} handleUpdateRenovation={handleUpdateRenovation} />

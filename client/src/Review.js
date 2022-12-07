@@ -30,7 +30,7 @@ const products = [
   { name: 'Shipping', desc: '', price: 0 },
 ];
 
-export default function Review({ firstName, lastName, address1, address2, city, state, zip, country, cardName, cardNumber, expDate, cart }) {
+export default function Review({ firstName, lastName, address1, address2, city, state, zip, country, cardName, cardNumber, expDate, cart, user }) {
 
   const addresses = [address1, address2, city, state, zip, country];
   const payments = [
@@ -96,7 +96,7 @@ export default function Review({ firstName, lastName, address1, address2, city, 
               </React.Fragment>
             ))}
           </Grid>
-          <GooglePayItem />
+          <GooglePayItem user={user} />
         </Grid>
       </Grid>
     </React.Fragment>

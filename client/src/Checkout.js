@@ -58,19 +58,19 @@ export default function Checkout({ user }) {
       .then((cart) => setCart(cart));
   }, []);
 
-  function handlePaymentClick() {
-    fetch(`http://localhost:3000/carts/${cart.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        has_converted: !cart.has_converted,
-      }),
-   })
-      .then((r) => r.json())
-      .then((updatedCart) => console.log(updatedCart));
-}
+//   function handlePaymentClick() {
+//     fetch(`http://localhost:3000/carts/${cart.id}`, {
+//       method: "PATCH",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         has_converted: !cart.has_converted,
+//       }),
+//    })
+//       .then((r) => r.json())
+//       .then((updatedCart) => console.log(updatedCart));
+// }
 
   function getStepContent(step) {
     switch (step) {

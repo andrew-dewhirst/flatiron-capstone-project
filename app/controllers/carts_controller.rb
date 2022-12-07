@@ -5,8 +5,14 @@ class CartsController < ApplicationController
   # GET /carts
   # GET /carts.json
   def index
-    carts = Cart.all
-    render json: carts
+    user = User.find_by(id: session[:user_id])
+    active_carts = user.carts.where(has_converted: false).map { |cart| cart.cards }
+    purchased_carts = user.carts.where(has_converted: true).map { |cart| cart.cards }
+    if user
+      render json: { active_carts: active_carts, purchased_carts: purchased_carts }, status: :created
+    else
+      render json: { error: "No cart found" }, status: :unauthorized
+    end
   end
 
   # GET /carts/1
