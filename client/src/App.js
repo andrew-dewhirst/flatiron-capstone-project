@@ -19,6 +19,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [cards, setCards] = useState([]);
   const [lineItems, setLineItems] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [cart, setCart] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [renovations, setRenovations] = useState([]);
@@ -38,6 +39,12 @@ function App() {
     fetch("/cards")
       .then((r) => r.json())
       .then((card) => setCards(card));
+  }, []);
+
+  useEffect(() => {
+    fetch("/reviews")
+      .then((r) => r.json())
+      .then((review) => setReviews(review));
   }, []);
 
   useEffect(() => {
@@ -72,6 +79,10 @@ function App() {
     });
     setRenovations(updatedRenovationArray);
   }
+
+  function handleNewReview(newReview) {
+    setReviews([...reviews, newReview])
+  };
 
   if (!user) return (
     <div>
@@ -110,7 +121,7 @@ function App() {
           <Checkout user={user} cart={user.cart}/>
         </Route>
         <Route exact path='/reviews/:cardName'>
-          <MyReviewDetail user={user.user} cards={cards} />
+          <MyReviewDetail user={user.user} cards={cards} reviews={reviews} handleNewReview={handleNewReview}/>
         </Route>
         <Route exact path="/renovations">
           <RenovationList renovations={renovations} user={user} handleUpdateRenovation={handleUpdateRenovation} />

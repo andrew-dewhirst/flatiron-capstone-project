@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useHistory } from "react-router-dom";
 import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -73,12 +74,12 @@ export default function MyReviewList({ reviewedCards, user }) {
   return (
     <React.Fragment>
       <Title>My Reviews</Title>
-      {uniqueCards?.map((cart) => {
+      {uniqueCards?.map((cart, index) => {
         return (
-         <div>
-          {cart?.map((card) =>{
+         <div key={index}>
+          {cart?.map((card, index) =>{
             return (
-              <button onClick={handleGoToReviews}>{card.name}</button>
+              <Button key={index} size="small" color="inherit" onClick={handleGoToReviews}>{card.name}</Button>
             )
           })}
           </div>
