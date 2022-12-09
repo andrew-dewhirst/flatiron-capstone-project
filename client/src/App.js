@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Stack from '@mui/material/Stack';
 import AppBar from "./AppBar";
 import Home from "./Home";
 import Account from "./Account";
@@ -87,7 +90,26 @@ function App() {
 
   if (!user) return (
     <div>
-      <h3>{errors}</h3>
+      {errors.length != 0 ? (
+        <div>
+          <Stack sx={{ width: '100%' }} spacing={2}>
+            <Alert severity="error" onClose={() => setErrors([])}>
+              <AlertTitle>Error</AlertTitle>
+              This is an error alert — <strong>{errors}</strong>
+            </Alert>
+          </Stack>
+          <AppBar user={user} lineItems={lineItems}/>
+          <Switch>
+            <Route exact path="/">
+              <SignIn onLogin={setUser} setErrors={setErrors} />;
+            </Route>
+            <Route exact path="/signup">
+              <SignUp onLogin={setUser} setErrors={setErrors} />
+            </Route>
+          </Switch>
+        </div>
+      ) : (
+        <div>
       <AppBar user={user} lineItems={lineItems}/>
       <Switch>
         <Route exact path="/">
@@ -97,6 +119,8 @@ function App() {
           <SignUp onLogin={setUser} setErrors={setErrors} />
         </Route>
       </Switch>
+      </div>
+      )}
     </div>
   )
 
@@ -124,12 +148,6 @@ function App() {
         <Route exact path='/reviews/:cardName'>
           <MyReviews user={user.user} cards={cards} reviews={reviews} handleNewReview={handleNewReview} handleDeletedReview={handleDeletedReview} handleUpdatedReview={handleUpdatedReview}/>
         </Route>
-        {/* <Route exact path="/renovations">
-          <RenovationList renovations={renovations} user={user} handleUpdateRenovation={handleUpdateRenovation} />
-        </Route> */}
-        {/* <Route exact path="/new_renovation">
-          <NewRenovation user={user} renovations={renovations} handleNewRenovation={handleNewRenovation} />
-        </Route> */}
       </Switch>
     </div>
   );
