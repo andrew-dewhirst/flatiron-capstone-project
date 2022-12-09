@@ -6,31 +6,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
 
-const products = [
-  {
-    name: 'Product 1',
-    desc: 'A nice thing',
-    price: 9,
-  },
-  {
-    name: 'Product 2',
-    desc: 'Another thing',
-    price: 17.21,
-  },
-  {
-    name: 'Product 3',
-    desc: 'Something else',
-    price: 103.50,
-  },
-  {
-    name: 'Product 4',
-    desc: 'Best thing of all',
-    price: 200.0,
-  },
-  { name: 'Shipping', desc: '', price: 0 },
-];
-
-export default function Review({ firstName, lastName, address1, address2, city, state, zip, country, cardName, cardNumber, expDate, cart, user }) {
+export default function OrderReview({ firstName, lastName, address1, address2, city, state, zip, country, cardName, cardNumber, expDate, cart, user }) {
 
   const addresses = [address1, address2, city, state, zip, country];
   const payments = [

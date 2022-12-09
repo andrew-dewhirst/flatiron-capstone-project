@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import GooglePayButton from "@google-pay/button-react";
 
 function GooglePayItem({ user, cart }) {
@@ -34,12 +34,6 @@ function GooglePayItem({ user, cart }) {
     }
   };
 
-  const [buttonColor, setButtonColor] = useState("default");
-  const [buttonType, setButtonType] = useState("buy");
-  const [buttonSizeMode, setButtonSizeMode] = useState("static");
-  const [buttonWidth, setButtonWidth] = useState(240);
-  const [buttonHeight, setButtonHeight] = useState(40);
-
   const isTop = window === window.top;
 
     function handlePaymentClick() {
@@ -61,15 +55,15 @@ function GooglePayItem({ user, cart }) {
       <div className="demo">
         <GooglePayButton
           environment="TEST"
-          buttonColor={buttonColor}
-          buttonType={buttonType}
-          buttonSizeMode={buttonSizeMode}
+          buttonColor="default"
+          buttonType="buy"
+          buttonSizeMode="static"
           paymentRequest={paymentRequest}
           onClick = {handlePaymentClick}
           onLoadPaymentData={paymentRequest => {
             console.log("load payment data", paymentRequest);
           }}
-          style={{ width: buttonWidth, height: buttonHeight }}
+          style={{ width: 240, height: 40 }}
         />
       </div>
 

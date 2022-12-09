@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useParams } from 'react-router-dom';
+import React from "react";
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -13,8 +12,9 @@ import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Rating from '@mui/material/Rating';
+import MyReviewDetail from "./MyReviewDetail";
 
-export default function MyReviewCard({ card }) {
+export default function MyReviewCard({ card, handleDeletedReview, handleUpdatedReview }) {
   const totalRating = card.reviews.map((review) => review.rating)
   const averageRating = totalRating.reduce((a,b) => a + b, 0)/totalRating.length
 
@@ -72,17 +72,12 @@ export default function MyReviewCard({ card }) {
           <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
               {card.reviews.map((review) =>
-                <React.Fragment>
-                  <Typography display="block" key={review.id}>
-                    Title: {review.title}
-                  </Typography>
-                  <Typography display ="block">
-                    Description: {review.description}
-                  </Typography>
-                  <Typography display="block">
-                    Rating: {review.rating}
-                  </Typography>
-                </React.Fragment>
+                <MyReviewDetail
+                  key={review.id}
+                  review={review}
+                  handleDeletedReview={handleDeletedReview}
+                  handleUpdatedReview={handleUpdatedReview}
+                />
               )}
             </CardContent>
           </Collapse>

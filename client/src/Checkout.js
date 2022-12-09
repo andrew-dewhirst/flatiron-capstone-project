@@ -3,7 +3,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
 import Paper from '@mui/material/Paper';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -14,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
-import Review from './Review';
+import OrderReview from './OrderReview';
 
 function Copyright() {
   return (
@@ -58,20 +57,6 @@ export default function Checkout({ user }) {
       .then((cart) => setCart(cart));
   }, []);
 
-//   function handlePaymentClick() {
-//     fetch(`http://localhost:3000/carts/${cart.id}`, {
-//       method: "PATCH",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//         has_converted: !cart.has_converted,
-//       }),
-//    })
-//       .then((r) => r.json())
-//       .then((updatedCart) => console.log(updatedCart));
-// }
-
   function getStepContent(step) {
     switch (step) {
       case 0:
@@ -79,7 +64,7 @@ export default function Checkout({ user }) {
       case 1:
         return <PaymentForm setCardName={setCardName} setCardNumber={setCardNumber} setExpDate={setExpDate} setSecurityCode={setSecurityCode} />;
       case 2:
-        return <Review firstName={firstName} lastName={lastName} address1={address1} address2={address2} city={city} state={state} zip={zip} country={country} cardName={cardName} cardNumber={cardNumber} expDate={expDate} user={user} cart={cart} />;
+        return <OrderReview firstName={firstName} lastName={lastName} address1={address1} address2={address2} city={city} state={state} zip={zip} country={country} cardName={cardName} cardNumber={cardNumber} expDate={expDate} user={user} cart={cart} />;
       default:
         throw new Error('Unknown step');
     }
@@ -94,8 +79,6 @@ export default function Checkout({ user }) {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
-
-
 
   return (
     <ThemeProvider theme={theme}>

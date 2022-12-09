@@ -13,6 +13,12 @@ class ReviewsController < ApplicationController
     render json: review, status: :created
   end
 
+  def update
+    review = Review.find_by(id: params[:id])
+      review.update!(review_params)
+      render json: review
+  end 
+
   def destroy
     review = Review.find(params[:id])
     review.destroy
@@ -25,7 +31,7 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.permit(:title, :description, :rating, :card_id)
+    params.permit(:title, :description, :rating, :card_id, :user_id)
   end
 
   def render_unprocessable_entity_response(invalid)

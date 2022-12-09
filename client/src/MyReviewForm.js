@@ -1,11 +1,6 @@
 import React, { useState } from "react";
+import { useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import Rating from '@mui/material/Rating';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem'
@@ -36,7 +31,12 @@ const ratings = [
 ]
 
 
-function ReviewForm({ user, cards, reviews, handleNewReview }) {
+function MyReviewForm({ user, cards, reviews, handleNewReview }) {
+  
+  const params = useParams()
+  const filteredCards = cards.filter((card) => card.name.toLowerCase() === params.cardName.toLowerCase())
+  const cardId = filteredCards.map((card) => card.id)
+  console.log(cardId[0])
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -53,7 +53,7 @@ function ReviewForm({ user, cards, reviews, handleNewReview }) {
         title: title,
         description: description,
         rating: rating,
-        card_id: 1,
+        card_id: cardId[0],
       }),
     })
       .then((r) => r.json())
@@ -62,11 +62,11 @@ function ReviewForm({ user, cards, reviews, handleNewReview }) {
 
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-          Add A Review
-        </Typography>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
+        <Grid container direction="column" columns={16} spacing={3} sx={{mx: 'auto', my: 'auto', width: 400 }}>
+          <Typography variant="h6" align="center" gutterBottom>
+            Add A Review
+          </Typography>
+          <Grid item xs={6} sm={3}>
             <TextField
               disabled
               id="userName"
@@ -78,7 +78,7 @@ function ReviewForm({ user, cards, reviews, handleNewReview }) {
               defaultValue={user.username}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={6} sm={3}>
             <TextField
               required
               id="title"
@@ -90,7 +90,7 @@ function ReviewForm({ user, cards, reviews, handleNewReview }) {
               onChange={(e) => setTitle(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={6} sm={3}>
             <TextField
               required
               id="description"
@@ -103,7 +103,7 @@ function ReviewForm({ user, cards, reviews, handleNewReview }) {
               onChange={(e) => setDescription(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={3}>
             <TextField
               id="rating"
               select
@@ -121,11 +121,13 @@ function ReviewForm({ user, cards, reviews, handleNewReview }) {
                 </MenuItem>
               ))}
               </TextField>
-              <Button onClick={handleSubmit}>Submit Review</Button>
+              <Typography align="center">
+                <Button onClick={handleSubmit}>Submit Review</Button>
+              </Typography>
           </Grid>
         </Grid>
     </React.Fragment>
   )
 }
 
-export default ReviewForm
+export default MyReviewForm

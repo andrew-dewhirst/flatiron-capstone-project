@@ -4,15 +4,12 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import AppBar from "./AppBar";
 import Home from "./Home";
-import RenovationList from "./RenovationList";
-import NewRenovation from "./NewRenovation";
-import MyRenovation from "./MyRenovation";
 import Account from "./Account";
 import Genre from "./Genre";
 import Checkout from "./Checkout";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
-import MyReviewDetail from "./MyReviewDetail";
+import MyReviews from "./MyReviews";
 
 
 function App() {
@@ -22,7 +19,6 @@ function App() {
   const [reviews, setReviews] = useState([]);
   const [cart, setCart] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
-  const [renovations, setRenovations] = useState([]);
   const [errors, setErrors] = useState([]);
 
   let history = useHistory();
@@ -73,11 +69,16 @@ function App() {
     setLineItems(updatedLineItems);
   }
 
-  function handleUpdateRenovation(updatedRenovation) {
-    const updatedRenovationArray = renovations.map((renovation) => {
-      return renovation.id === updatedRenovation.id ? updatedRenovation : renovation;
+  function handleUpdatedReview(updatedReview) {
+    const updatedReviewArray = reviews.map((review) => {
+      return review.id === updatedReview.id ? updatedReview : review;
     });
-    setRenovations(updatedRenovationArray);
+    setReviews(updatedReviewArray);
+  }
+
+  function handleDeletedReview(deletedReview) {
+    const updatedReviews = reviews.filter((review) => review.id !== deletedReview)
+    setReviews(updatedReviews);
   }
 
   function handleNewReview(newReview) {
@@ -121,11 +122,11 @@ function App() {
           <Checkout user={user} cart={user.cart}/>
         </Route>
         <Route exact path='/reviews/:cardName'>
-          <MyReviewDetail user={user.user} cards={cards} reviews={reviews} handleNewReview={handleNewReview}/>
+          <MyReviews user={user.user} cards={cards} reviews={reviews} handleNewReview={handleNewReview} handleDeletedReview={handleDeletedReview} handleUpdatedReview={handleUpdatedReview}/>
         </Route>
-        <Route exact path="/renovations">
+        {/* <Route exact path="/renovations">
           <RenovationList renovations={renovations} user={user} handleUpdateRenovation={handleUpdateRenovation} />
-        </Route>
+        </Route> */}
         {/* <Route exact path="/new_renovation">
           <NewRenovation user={user} renovations={renovations} handleNewRenovation={handleNewRenovation} />
         </Route> */}
