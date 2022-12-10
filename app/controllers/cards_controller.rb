@@ -1,23 +1,10 @@
 class CardsController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
-  # before_action :authorize
 
   def index
     cards = Card.all
     render json: cards
   end
-
-  def create
-    user = User.find_by(id: session[:user_id])
-    card = user.cards.create!(card_params)
-    render json: card, status: :created
-  end
-
-  def update
-    card = Card.find_by(id: params[:id])
-      card.update!(card_params)
-      render json: card
-  end 
 
   def destroy
     card = Card.find(params[:id])

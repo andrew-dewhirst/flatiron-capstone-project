@@ -1,18 +1,5 @@
 class UsersController < ApplicationController
-
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
-
-  # def index
-  #   # users = User.all
-  #   users = User.first
-  #   if users
-  #     avatar = rails_blob_path(users.avatar)
-  #   # render json: users
-  #     render json: { users: users, avatar: avatar }
-  #   else
-  #     render json: { error: "No user found" }, status: :unauthorized
-  #   end
-  # end
 
   def index
     users = User.all
@@ -22,6 +9,11 @@ class UsersController < ApplicationController
   def create
     user = User.create!(user_params)
     session[:user_id] = user.id
+    user.avatar.attach(
+      io: File.open('./public/avatars/kid.png'),
+      filename: 'kid.png',
+      content_type: 'application/png'
+    )
     render json: user, status: :created
   end
 
@@ -45,7 +37,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:first_name, :last_name, :email, :birthday, :username, :password, :password_confirmation)
+    params.permit(:first_name, :last_name, :email, :birthday, :username, :password, :password_confirmation, :avatar)
   end
 
   def render_unprocessable_entity_response(invalid)

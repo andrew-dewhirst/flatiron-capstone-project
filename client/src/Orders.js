@@ -36,8 +36,8 @@ export default function Orders( {completedOrders, user }) {
           {saleAmount?.map((total, index) => (
             <TableRow key={index}>
               <TableCell>{Math.floor(Math.random() * maxNumber)}</TableCell>
-              <TableCell>{user.first_name} {user.last_name}</TableCell>
-              <TableCell>{user.email}</TableCell>
+              <TableCell>{user?.first_name} {user?.last_name}</TableCell>
+              <TableCell>{user?.email}</TableCell>
               <TableCell align="right">${total.toFixed(2)}</TableCell>
             </TableRow>
           ))}

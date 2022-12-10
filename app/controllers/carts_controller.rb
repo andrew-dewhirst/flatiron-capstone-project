@@ -1,6 +1,4 @@
 class CartsController < ApplicationController
-  # rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
-  # before_action :set_cart, only: [:show, :edit, :update, :destroy]
 
   # GET /carts
   # GET /carts.json
@@ -25,14 +23,6 @@ class CartsController < ApplicationController
       render json: { error: "Cart not found"}, status: :not_found
     end
   end
-  #   user = User.find_by(id: session[:user_id])
-  #   active_cart = user.carts.where(has_converted: false).first
-  #   if user
-  #     render json: active_cart.cards, status: :created
-  #   else
-  #     render json: { error: "Invalid username or password" }, status: :unauthorized
-  #   end
-  # end
 
   # GET /carts/new
   def new

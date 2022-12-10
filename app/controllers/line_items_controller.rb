@@ -1,7 +1,4 @@
 class LineItemsController < ApplicationController
-  # include CurrentCart
-  # before_action :set_line_item, only: [:show, :edit, :update, :destroy]
-  # before_action :set_cart, only: [:create]
 
   def index
     line_items = LineItem.all
@@ -22,27 +19,9 @@ class LineItemsController < ApplicationController
   def edit
   end
 
-  # POST /line_items
-  # POST /line_items.json
-  # def create
-  #   card = Card.find(params[:card_id])
-  #   @line_item = @cart.add_card(card)
-
-  #   respond_to do |format|
-  #     if @line_item.save
-  #       format.html { redirect_to @line_item.cart, notice: 'Item added to cart.' }
-  #       format.json { render :show, status: :created, location: @line_item }
-  #     else
-  #       format.html { render :new }
-  #       format.json { render json: @line_item.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-
   def create
     card = Card.find(params[:card_id])
     line_item = card.line_items.create!(line_item_params)
-    # card = Card.find_by(id: session[:user_id])
     render json: line_item, status: :created
   end
 

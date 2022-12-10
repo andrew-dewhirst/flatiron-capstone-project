@@ -13,14 +13,13 @@ import Checkout from "./Checkout";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import MyReviews from "./MyReviews";
-
+import People from "./People"
 
 function App() {
   const [user, setUser] = useState(null);
   const [cards, setCards] = useState([]);
   const [lineItems, setLineItems] = useState([]);
   const [reviews, setReviews] = useState([]);
-  const [cart, setCart] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [errors, setErrors] = useState([]);
 
@@ -90,13 +89,15 @@ function App() {
 
   if (!user) return (
     <div>
-      {errors.length != 0 ? (
+      {errors?.length !== 0 ? (
         <div>
           <Stack sx={{ width: '100%' }} spacing={2}>
-            <Alert severity="error" onClose={() => setErrors([])}>
+            {errors.map((error, index) =>
+            <Alert key={index} severity="error" onClose={() => setErrors([])}>
               <AlertTitle>Error</AlertTitle>
-              This is an error alert — <strong>{errors}</strong>
+              This is an error alert — <strong>{error}</strong>
             </Alert>
+            )}
           </Stack>
           <AppBar user={user} lineItems={lineItems}/>
           <Switch>
@@ -126,6 +127,7 @@ function App() {
 
   return (
     <div>
+      <People />
       <AppBar user={user} lineItems={lineItems}/>
       <Box display='flex' justifyContent='flex-end'>
         <Button variant="contained" href="/" onClick={handleLogoutClick}>
@@ -146,7 +148,7 @@ function App() {
           <Checkout user={user} cart={user.cart}/>
         </Route>
         <Route exact path='/reviews/:cardName'>
-          <MyReviews user={user.user} cards={cards} reviews={reviews} handleNewReview={handleNewReview} handleDeletedReview={handleDeletedReview} handleUpdatedReview={handleUpdatedReview}/>
+          <MyReviews user={user.user} cards={cards} reviews={reviews} handleNewReview={handleNewReview} handleDeletedReview={handleDeletedReview} handleUpdatedReview={handleUpdatedReview} />
         </Route>
       </Switch>
     </div>

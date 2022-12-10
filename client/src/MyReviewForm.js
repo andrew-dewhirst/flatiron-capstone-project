@@ -75,7 +75,7 @@ function MyReviewForm({ user, cards, reviews, handleNewReview }) {
               fullWidth
               autoComplete="given-name"
               variant="filled"
-              defaultValue={user.username}
+              defaultValue={user?.username}
             />
           </Grid>
           <Grid item xs={6} sm={3}>
