@@ -15,19 +15,6 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Snackbar from '@mui/material/Snackbar';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Card Collector Emporium
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const theme = createTheme();
 
 export default function CardInfo({ cart, lineItems, card, handleCheckoutClick, handleAddLineItem, handleLineItemDelete }) {
@@ -88,10 +75,10 @@ function handleRemoveFromCartClick() {
       <CssBaseline />
       <main>
         {/* Hero unit */}
-        <Container sx={{ py: 8 }} maxWidth="md">
+        <Container sx={{ py: 6 }} maxWidth="md">
           {/* End hero unit */}
-          <Grid container spacing={4}>
-              <Grid item key={card} xs={12} sm={6} md={4}>
+          <Grid container spacing={0} >
+              <Grid item key={card} xs={10} sm={12} md={10} >
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                 >
@@ -111,6 +98,9 @@ function handleRemoveFromCartClick() {
                     <Typography>
                       {card.description}
                     </Typography>
+                    <Typography>
+                      ${card.price}0
+                    </Typography>
                   </CardContent>
                   <CardActions>
                     <Button onClick={handleAddToCartClick} size="small">Add to Cart</Button>
@@ -129,7 +119,6 @@ function handleRemoveFromCartClick() {
         </Container>
       </main>
       <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
-        <Copyright />
       </Box>
     </ThemeProvider>
   );

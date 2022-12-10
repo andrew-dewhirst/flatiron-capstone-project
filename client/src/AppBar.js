@@ -112,7 +112,7 @@ function ResponsiveAppBar({user, lineItems}) {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: 'block', md: 'block' },
               }}
             >
               {pages.map((page) => (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -12,11 +12,15 @@ import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Rating from '@mui/material/Rating';
+import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import MyReviewDetail from "./MyReviewDetail";
 
+
 export default function MyReviewCard({ card, handleDeletedReview, handleUpdatedReview }) {
+  
   const totalRating = card.reviews.map((review) => review.rating)
   const averageRating = totalRating.reduce((a,b) => a + b, 0)/totalRating.length
+
 
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -40,17 +44,17 @@ export default function MyReviewCard({ card, handleDeletedReview, handleUpdatedR
           <Card sx={{ maxWidth: 345 }}>
           <CardHeader
             avatar={
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                {card.genre}
+              <Avatar sx={{ bgcolor: red[500] }} aria-label="avatar">
+                <CatchingPokemonIcon />
               </Avatar>
             }
             title={card.name}
           />
           <CardMedia
             component="img"
-            height="194"
+            height="400"
             image={card.image}
-            alt="Paella dish"
+            alt="Card Image"
           />
           <CardContent>
             <Typography variant="body2" color="text.secondary">
