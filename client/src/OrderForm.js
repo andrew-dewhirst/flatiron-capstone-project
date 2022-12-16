@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from "react";
 import GooglePayItem from './GooglePayItem';
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
@@ -6,7 +6,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
 
-export default function OrderReview({ firstName, lastName, address1, address2, city, state, zip, country, cardName, cardNumber, expDate, cart, user }) {
+export default function OrderForm({ firstName, lastName, address1, address2, city, state, zip, country, cardName, cardNumber, expDate, cart, handlePaymentClick }) {
 
   const addresses = [address1, address2, city, state, zip, country];
   const payments = [
@@ -72,7 +72,7 @@ export default function OrderReview({ firstName, lastName, address1, address2, c
               </React.Fragment>
             ))}
           </Grid>
-          <GooglePayItem user={user} />
+          <GooglePayItem handlePaymentClick={handlePaymentClick} />
         </Grid>
       </Grid>
     </React.Fragment>

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { MyContext } from './Context'
 import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -13,7 +14,8 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
-import OrderReview from './OrderReview';
+import OrderForm from './OrderForm';
+import Confirmation from './Confirmation';
 
 function Copyright() {
   return (
@@ -32,7 +34,8 @@ const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
 const theme = createTheme();
 
-export default function Checkout({ user }) {
+export default function Checkout() {
+  const contextData = useContext(MyContext)
 
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
@@ -48,14 +51,29 @@ export default function Checkout({ user }) {
   const [securityCode, setSecurityCode] = useState("")
   const [cart, setCart] = useState([])
 
-  console.log(user.cart)
+  function handlePaymentClick() {
+    fetch(`http://localhost:3000/carts/${contextData.user.cart.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        has_converted: !contextData.user.cart.has_converted,
+      }),
+   })
+      .then((r) => r.json())
+      .then((updatedCart) => console.log(updatedCart));
+}
+
   console.log(cart)
 
   useEffect(() => {
-    fetch(`/carts/${user.cart.id}`)
+    fetch(`/carts/${contextData.user.cart.id}`)
       .then((r) => r.json())
       .then((cart) => setCart(cart));
   }, []);
+
+  console.log(cart)
 
   function getStepContent(step) {
     switch (step) {
@@ -64,7 +82,7 @@ export default function Checkout({ user }) {
       case 1:
         return <PaymentForm setCardName={setCardName} setCardNumber={setCardNumber} setExpDate={setExpDate} setSecurityCode={setSecurityCode} />;
       case 2:
-        return <OrderReview firstName={firstName} lastName={lastName} address1={address1} address2={address2} city={city} state={state} zip={zip} country={country} cardName={cardName} cardNumber={cardNumber} expDate={expDate} user={user} cart={cart} />;
+        return <OrderForm firstName={firstName} lastName={lastName} address1={address1} address2={address2} city={city} state={state} zip={zip} country={country} cardName={cardName} cardNumber={cardNumber} expDate={expDate} cart={cart} handlePaymentClick={handlePaymentClick}/>;
       default:
         throw new Error('Unknown step');
     }
@@ -106,16 +124,7 @@ export default function Checkout({ user }) {
             ))}
           </Stepper>
           {activeStep === steps.length ? (
-            <React.Fragment>
-              <Typography variant="h5" gutterBottom>
-                Thank you for your order.
-              </Typography>
-              <Typography variant="subtitle1">
-                Your order number is #2001539. We have emailed your order
-                confirmation, and will send you an update when your order has
-                shipped.
-              </Typography>
-            </React.Fragment>
+            <Confirmation handlePaymentClick={handlePaymentClick}/>
           ) : (
             <React.Fragment>
               {getStepContent(activeStep)}

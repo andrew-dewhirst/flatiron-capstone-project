@@ -1,4 +1,6 @@
-import * as React from 'react';
+import React, {useState, useContext } from 'react';
+import { MyContext } from './Context'
+import { useHistory } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -28,32 +30,46 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUp({ onLogin, setErrors }) {
+export default function SignUp() {
+  const contextData = useContext(MyContext)
+  const onLogin = contextData.setUser
+
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [passwordConfirmation, setPasswordConfirmation] = useState("")
+  const [avatar, setAvatar] = useState("")
+
+  let history = useHistory();
+
+  console.log(avatar)
 
   function handleSubmit(event) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const data = new FormData();
+
+    data.append("[user][first_name]", firstName);
+    data.append("[user][last_name]", lastName);
+    data.append("[user][email]", email);
+    data.append("[user][username]", username);
+    data.append("[user][password]", password);
+    data.append("[user][password_confirmation]", passwordConfirmation);
+    data.append("[user][avatar]", avatar);
+
     fetch("/signup", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        first_name: data.get('firstName'),
-        last_name: data.get('lastName'),
-        email: data.get('email'),
-        username: data.get('username'),
-        password: data.get('password'),
-        password_confirmation: data.get('confirm-password'),
-      }),
+      body: data
     })
     .then((response) => {
       if (response.ok) {
         response.json().then((user) => onLogin(user));
       } else {
-        response.json().then((errorData) => setErrors(errorData.errors));
+        response.json().then((errorData) => contextData.setErrors(errorData.errors));
       }
     })
+    history.push(`/`);
   };
 
   return (
@@ -85,6 +101,7 @@ export default function SignUp({ onLogin, setErrors }) {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  onChange={(e) => setFirstName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -95,6 +112,7 @@ export default function SignUp({ onLogin, setErrors }) {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  onChange={(e) => setLastName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -105,6 +123,7 @@ export default function SignUp({ onLogin, setErrors }) {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -116,6 +135,7 @@ export default function SignUp({ onLogin, setErrors }) {
                   type="username"
                   id="username"
                   autoComplete="username"
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -127,19 +147,22 @@ export default function SignUp({ onLogin, setErrors }) {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  name="confirm-password"
+                  name="confirmPassword"
                   label="Confirm Password"
                   type="password"
-                  id="confirm-password"
-                  autoComplete="confirm-password"
+                  id="confirmPassword"
+                  autoComplete="confirmPassword"
+                  onChange={(e) => setPasswordConfirmation(e.target.value)}
                 />
               </Grid>
+              <input type="file" name="avatar" id="avatar" onChange={(e) => setAvatar(e.target.files[0])}/>
               <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}

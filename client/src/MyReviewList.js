@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import Button from '@mui/material/Button';
 import Title from './Title';
 
-export default function MyReviewList({ reviewedCards, user }) {
+export default function MyReviewList({ reviewedCards }) {
   let history = useHistory();
 
   const uniqueIds = []

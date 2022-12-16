@@ -86,7 +86,7 @@ function MyReviewDetail({ review, handleDeletedReview, handleUpdatedReview }) {
       <Typography display ="block">
         Description: {review.description}
       </Typography>
-      <Rating name="half-rating-read" defaultValue={review.rating} precision={0.5} readOnly />
+      <Rating name="half-rating-read" defaultValue={review?.rating} precision={0.5} readOnly />
       <Grid>
         <Button onClick={handleDeleteClick}>Delete</Button>
         <Button onClick={handleClickOpen}>Edit</Button>

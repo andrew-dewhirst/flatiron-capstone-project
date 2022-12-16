@@ -1,7 +1,7 @@
 import React from "react";
 import GooglePayButton from "@google-pay/button-react";
 
-function GooglePayItem({ user, cart }) {
+function GooglePayItem({ handlePaymentClick }) {
 
   const paymentRequest = {
     apiVersion: 2,
@@ -36,20 +36,6 @@ function GooglePayItem({ user, cart }) {
 
   const isTop = window === window.top;
 
-    function handlePaymentClick() {
-    fetch(`http://localhost:3000/carts/${user.cart.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        has_converted: !user.cart.has_converted,
-      }),
-   })
-      .then((r) => r.json())
-      .then((updatedCart) => console.log(updatedCart));
-}
-
   return (
     <div>
       <div className="demo">
@@ -66,6 +52,7 @@ function GooglePayItem({ user, cart }) {
           style={{ width: 240, height: 40 }}
         />
       </div>
+
 
       <div className="note" style={{ display: isTop ? "none" : "" }}>
         <p>

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from 'react';
+import { MyContext } from './Context'
 import { useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
@@ -31,12 +32,13 @@ const ratings = [
 ]
 
 
-function MyReviewForm({ user, cards, reviews, handleNewReview }) {
+function MyReviewForm({ cards, reviews, handleNewReview }) {
+  // user, 
+  const contextData = useContext(MyContext)
   
   const params = useParams()
-  const filteredCards = cards.filter((card) => card.name.toLowerCase() === params.cardName.toLowerCase())
+  const filteredCards = contextData.cards.filter((card) => card.name.toLowerCase() === params.cardName.toLowerCase())
   const cardId = filteredCards.map((card) => card.id)
-  console.log(cardId[0])
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -57,7 +59,7 @@ function MyReviewForm({ user, cards, reviews, handleNewReview }) {
       }),
     })
       .then((r) => r.json())
-      .then((newReview) => handleNewReview(newReview));
+      .then((newReview) => contextData.handleNewReview(newReview))
   }
 
   return (
@@ -75,7 +77,7 @@ function MyReviewForm({ user, cards, reviews, handleNewReview }) {
               fullWidth
               autoComplete="given-name"
               variant="filled"
-              defaultValue={user?.username}
+              defaultValue={contextData.user?.user?.username}
             />
           </Grid>
           <Grid item xs={6} sm={3}>

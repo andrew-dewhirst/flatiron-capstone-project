@@ -18,4 +18,5 @@ code {
 
 .container {
   columns: 4 auto;
+  align-items: stretch;
 }

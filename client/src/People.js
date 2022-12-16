@@ -1,13 +1,16 @@
-import React from "react";
-import { MyConsumer } from './Context';
+import React, { useContext } from "react";
+import { MyContext } from './Context'
 
 function People() {
-  return (
-    <MyConsumer>
-      {context => 
-        <h1>{context.person.name}</h1>
-        }
-    </MyConsumer>
+  const cards = useContext(MyContext)
+  console.log(cards)
+  return ( 
+      <> 
+        <h1>My Name: {cards?.cards[0]?.id}</h1>
+        <br />   
+      </>
+
+        
   )
 }
 

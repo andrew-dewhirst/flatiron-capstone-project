@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useContext } from "react";
+import { MyContext } from './Context'
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -9,7 +10,6 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
@@ -17,7 +17,10 @@ import Snackbar from '@mui/material/Snackbar';
 
 const theme = createTheme();
 
-export default function CardInfo({ cart, lineItems, card, handleCheckoutClick, handleAddLineItem, handleLineItemDelete }) {
+export default function CardInfo({ lineItems, card, handleCheckoutClick, handleAddLineItem, handleLineItemDelete }) {
+  // cart, 
+
+  const contextData = useContext(MyContext)
 
   const [open, setOpen] = React.useState(false);
 
@@ -51,7 +54,7 @@ function handleAddToCartClick() {
     },
     body: JSON.stringify({
       card_id: card.id,
-      cart_id: cart.id,
+      cart_id: contextData.user.cart.id,
       quantity: 1,
     }),
   })
@@ -87,6 +90,7 @@ function handleRemoveFromCartClick() {
                     sx={{
                       // 16:9
                       pt: '56.25%',
+                    
                     }}
                     image={card.image}
                     alt="random"

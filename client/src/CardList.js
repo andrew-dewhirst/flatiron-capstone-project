@@ -1,8 +1,6 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
+import React, { useContext } from "react";
+import { useParams } from 'react-router-dom';
+import { MyContext } from './Context'
 import CardInfo from "./CardInfo";
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
@@ -20,20 +18,21 @@ function Copyright() {
   );
 }
 
-function CardList({ cart, lineItems, filteredCards, cardsToDisplay, setCards, handleAddLineItem, handleLineItemDelete }) {
+function CardList() {
+  const contextData = useContext(MyContext)
+  const params = useParams()
 
-  console.log(filteredCards)
+  const filteredCards = contextData.cardsToDisplay.filter((card) => card.genre.toLowerCase() === params.genre.toLowerCase())
 
   return (
-    <div class = "container">
+    <div className = "container">
       {filteredCards.map((card) =>
         <CardInfo
           key={card.id}
           card={card}
-          cart={cart}
           lineItems={card.line_items}
-          handleAddLineItem={handleAddLineItem}
-          handleLineItemDelete={handleLineItemDelete}
+          handleAddLineItem={contextData.handleAddLineItem}
+          handleLineItemDelete={contextData.handleLineItemDelete}
         />
       )}
       <Copyright />

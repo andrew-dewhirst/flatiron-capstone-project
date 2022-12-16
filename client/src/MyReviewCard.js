@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext } from 'react';
+import { MyContext } from './Context'
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -16,10 +17,14 @@ import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import MyReviewDetail from "./MyReviewDetail";
 
 
-export default function MyReviewCard({ card, handleDeletedReview, handleUpdatedReview }) {
+export default function MyReviewCard({ card, handleDeletedReview, handleUpdatedReview, reviews }) {
+
+  const contextData = useContext(MyContext)
   
-  const totalRating = card.reviews.map((review) => review.rating)
+  const filteredReviews = contextData?.reviews.filter((review) => review.card_id === card.id)
+  const totalRating = filteredReviews.map((review) => review.rating)
   const averageRating = totalRating.reduce((a,b) => a + b, 0)/totalRating.length
+  console.log(averageRating)
 
 
   const ExpandMore = styled((props) => {
@@ -75,7 +80,7 @@ export default function MyReviewCard({ card, handleDeletedReview, handleUpdatedR
           </CardActions>
           <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
-              {card.reviews.map((review) =>
+              {filteredReviews.map((review) =>
                 <MyReviewDetail
                   key={review.id}
                   review={review}

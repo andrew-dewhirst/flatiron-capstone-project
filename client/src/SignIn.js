@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { MyContext } from './Context'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -28,7 +29,9 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn({ onLogin, setErrors }) {
+export default function SignIn() {
+  const contextData = useContext(MyContext)
+  const onLogin = contextData.setUser
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -48,7 +51,7 @@ export default function SignIn({ onLogin, setErrors }) {
       if (response.ok) {
         response.json().then((user) => onLogin(user));
       } else {
-        response.json().then((errorData) => setErrors(errorData.errors));
+        response.json().then((errorData) => contextData.setErrors(errorData.errors));
       }
     })
   };
@@ -92,7 +95,7 @@ export default function SignIn({ onLogin, setErrors }) {
               id="password"
               autoComplete="current-password"
             />
-                        <TextField
+            <TextField
               margin="normal"
               required
               fullWidth

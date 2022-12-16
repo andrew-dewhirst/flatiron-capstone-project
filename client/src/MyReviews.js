@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useContext } from 'react';
+import { MyContext } from './Context'
 import { useParams } from 'react-router-dom';
 import MyReviewCard from "./MyReviewCard";
 import MyReviewForm from "./MyReviewForm";
 
-function MyReviews({ user, cards, reviews, handleNewReview, handleDeletedReview, handleUpdatedReview }) {
+function MyReviews({ cards, reviews, handleNewReview, handleDeletedReview, handleUpdatedReview }) 
+// user
+{
+  const contextData = useContext(MyContext)
   
   const params = useParams()
 
-  const filteredCards = cards.filter((card) => card.name.toLowerCase() === params.cardName.toLowerCase())
+  const filteredCards = contextData.cards.filter((card) => card.name.toLowerCase() === params.cardName.toLowerCase())
 
   return (
     <div className='test'>
@@ -15,11 +19,16 @@ function MyReviews({ user, cards, reviews, handleNewReview, handleDeletedReview,
       <MyReviewCard
         key={card.id}
         card={card}
-        handleDeletedReview={handleDeletedReview}
-        handleUpdatedReview={handleUpdatedReview}
+        handleDeletedReview={contextData.handleDeletedReview}
+        handleUpdatedReview={contextData.handleUpdatedReview}
+        // reviews={reviews}
         />
        )}
-      <MyReviewForm user={user} cards={cards} reviews={reviews} handleNewReview={handleNewReview} />
+      <MyReviewForm />
+      {/* handleNewReview={handleNewReview} */}
+      {/* reviews={reviews} */}
+      {/* user={user} */}
+      {/* cards={cards}  */}
     </div>
   )
 }

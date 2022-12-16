@@ -1,5 +1,6 @@
-import * as React from 'react';
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { MyContext } from './Context'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -19,13 +20,14 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 const pages = ['Pokemon', 'Baseball', 'Basketball', 'Football', 'Hockey']; 
 const settings = ['Profile', 'Checkout'];
 
-function ResponsiveAppBar({user, lineItems}) {
+function ResponsiveAppBar() {
   let history = useHistory();
+  const contextData = useContext(MyContext)
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   
-  const cartIconCount = lineItems.filter((lineItem) => lineItem.cart_id === user?.cart?.id).length
+  const cartIconCount = contextData.lineItems.filter((lineItem) => lineItem.cart_id === contextData.user?.cart?.id).length
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -156,7 +158,7 @@ function ResponsiveAppBar({user, lineItems}) {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt={user?.user?.first_name} src={`http://localhost:3000/${user?.avatar}`} />
+                <Avatar alt={contextData.user?.user?.first_name} src={`http://localhost:3000/${contextData.user?.avatar}`} />
               </IconButton>
             </Tooltip>
             <Menu

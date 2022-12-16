@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
+import { MyContext } from './Context'
 import Link from '@mui/material/Link';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,7 +12,8 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function Orders( {completedOrders, user }) {
+export default function MyOrders( {completedOrders }) {
+  const contextData = useContext(MyContext)
 
   console.log(completedOrders)
 
@@ -36,8 +38,8 @@ export default function Orders( {completedOrders, user }) {
           {saleAmount?.map((total, index) => (
             <TableRow key={index}>
               <TableCell>{Math.floor(Math.random() * maxNumber)}</TableCell>
-              <TableCell>{user?.first_name} {user?.last_name}</TableCell>
-              <TableCell>{user?.email}</TableCell>
+              <TableCell>{contextData.user?.user?.first_name} {contextData.user?.user?.last_name}</TableCell>
+              <TableCell>{contextData.user?.user?.email}</TableCell>
               <TableCell align="right">${total.toFixed(2)}</TableCell>
             </TableRow>
           ))}

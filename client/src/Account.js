@@ -15,7 +15,7 @@ import Link from '@mui/material/Link';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems } from './listItems';
 import MyReviewList from './MyReviewList';
-import Orders from './Orders';
+import MyOrders from './MyOrders';
 
 function Copyright(props) {
   return (
@@ -60,7 +60,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const mdTheme = createTheme();
 
-export default function Account({ user }) {
+export default function Account() {
   const [cartReview, setCartReview] = useState({});
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
@@ -122,13 +122,12 @@ export default function Account({ user }) {
                     height: 240,
                   }}
                 >
-                  <MyReviewList reviewedCards={cartReview.purchased_carts} user={user.user}/>
+                  <MyReviewList reviewedCards={cartReview.purchased_carts} />
                 </Paper>
               </Grid>
-              {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders completedOrders={cartReview.purchased_carts} user={user.user}/>
+                  <MyOrders completedOrders={cartReview.purchased_carts} />
                 </Paper>
               </Grid>
             </Grid>

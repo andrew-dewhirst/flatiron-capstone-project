@@ -9,11 +9,6 @@ class UsersController < ApplicationController
   def create
     user = User.create!(user_params)
     session[:user_id] = user.id
-    user.avatar.attach(
-      io: File.open('./public/avatars/kid.png'),
-      filename: 'kid.png',
-      content_type: 'application/png'
-    )
     render json: user, status: :created
   end
 
@@ -34,10 +29,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    user = User.find_by(id: params[:id])
+      user.update!(user_params)
+      render json: user
+  end 
+
   private
 
   def user_params
-    params.permit(:first_name, :last_name, :email, :birthday, :username, :password, :password_confirmation, :avatar)
+    params.require(:user).permit(:first_name, :last_name, :email, :birthday, :username, :password, :password_confirmation, :avatar)
   end
 
   def render_unprocessable_entity_response(invalid)
