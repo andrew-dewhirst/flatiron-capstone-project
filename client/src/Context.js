@@ -63,6 +63,8 @@ const MyProvider = (props) => {
 
   const cardsToDisplay = cards.filter((card) => card.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
+  const cartIconCount = lineItems?.filter((lineItem) => lineItem.cart_id === user?.cart?.id).length
+
   function handleLogoutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
@@ -112,6 +114,7 @@ const MyProvider = (props) => {
       errors: errors,
       setErrors: setErrors,
       cardsToDisplay: cardsToDisplay,
+      cartIconCount: cartIconCount,
       firstName: firstName,
       setFirstName: setFirstName,
       lastName: lastName,

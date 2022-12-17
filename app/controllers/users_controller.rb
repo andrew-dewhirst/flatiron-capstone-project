@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
+
   def index
     users = User.all
     render json: users
@@ -38,7 +39,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :birthday, :username, :password, :password_confirmation, :avatar)
+    params.require(:user).permit(:first_name, :last_name, :email, :birthday, :username, :password, :password_confirmation, :avatar) 
   end
 
   def render_unprocessable_entity_response(invalid)

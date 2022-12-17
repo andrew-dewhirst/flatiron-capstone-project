@@ -26,8 +26,6 @@ function ResponsiveAppBar() {
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  
-  const cartIconCount = contextData.lineItems?.filter((lineItem) => lineItem.cart_id === contextData.user?.cart?.id).length
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -66,7 +64,7 @@ function ResponsiveAppBar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-        <Badge color="secondary" badgeContent={cartIconCount} overlap="circular" style={{  transform: 'translate(25px, -10px)'}}>
+        <Badge color="secondary" badgeContent={contextData.cartIconCount} overlap="circular" style={{  transform: 'translate(25px, -10px)'}}>
         </Badge>
         <ShoppingCartIcon onClick={handleCheckoutClick} sx={{ display: { xs: 'flex', md: 'flex' }, mr: 2 }} />
         

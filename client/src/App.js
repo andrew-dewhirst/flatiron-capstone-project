@@ -23,7 +23,7 @@ function App() {
       {contextData.errors?.length !== 0 ? (
         <div>
           <Stack sx={{ width: '100%' }} spacing={2}>
-            {contextData.errors.map((error, index) =>
+            {contextData.errors?.map((error, index) =>
             <Alert key={index} severity="error" onClose={() => contextData.setErrors([])}>
               <AlertTitle>Error</AlertTitle>
               This is an error alert — <strong>{error}</strong>
