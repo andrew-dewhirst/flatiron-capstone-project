@@ -17,15 +17,13 @@ import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import MyReviewDetail from "./MyReviewDetail";
 
 
-export default function MyReviewCard({ card, handleDeletedReview, handleUpdatedReview, reviews }) {
+export default function MyReviewCard({ card, handleDeletedReview, handleUpdatedReview }) {
 
   const contextData = useContext(MyContext)
   
   const filteredReviews = contextData?.reviews.filter((review) => review.card_id === card.id)
   const totalRating = filteredReviews.map((review) => review.rating)
   const averageRating = totalRating.reduce((a,b) => a + b, 0)/totalRating.length
-  console.log(averageRating)
-
 
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;

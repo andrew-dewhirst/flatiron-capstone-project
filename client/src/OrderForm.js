@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { MyContext } from './Context'
 import GooglePayItem from './GooglePayItem';
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
@@ -6,17 +7,18 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
 
-export default function OrderForm({ firstName, lastName, address1, address2, city, state, zip, country, cardName, cardNumber, expDate, cart, handlePaymentClick }) {
+export default function OrderForm({ handlePaymentClick }) {
+  const contextData = useContext(MyContext)
 
-  const addresses = [address1, address2, city, state, zip, country];
+  const addresses = [contextData.address1, contextData.address2, contextData.city, contextData.state, contextData.zip, contextData.country];
   const payments = [
     { name: 'Card type', detail: 'Visa' },
-    { name: 'Card holder', detail: `${cardName}` },
-    { name: 'Card number', detail: `${cardNumber}` },
-    { name: 'Expiry date', detail: `${expDate}` },
+    { name: 'Card holder', detail: `${contextData.cardName}` },
+    { name: 'Card number', detail: `${contextData.cardNumber}` },
+    { name: 'Expiry date', detail: `${contextData.expDate}` },
   ];
 
-  const price = cart.map((card) => card.price)
+  const price = contextData.cart.map((card) => card.price)
   const cartTotal = price.map(Number)
   const totalPrice = cartTotal.reduce((a,b) => a + b, 0)
 
@@ -27,7 +29,7 @@ export default function OrderForm({ firstName, lastName, address1, address2, cit
         Order summary
       </Typography>
       <List disablePadding>
-        {cart.map((card, index) => (
+        {contextData.cart.map((card, index) => (
           <ListItem key={index} sx={{ py: 1, px: 0 }}>
             <ListItemText primary={card.name} secondary={card.description} />
             <Typography variant="body2">${card.price}0</Typography>
@@ -53,7 +55,7 @@ export default function OrderForm({ firstName, lastName, address1, address2, cit
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Shipping
           </Typography>
-          <Typography gutterBottom>{firstName} {lastName}</Typography>
+          <Typography gutterBottom>{contextData.firstName} {contextData.lastName}</Typography>
           <Typography gutterBottom>{addresses.join(', ')}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>

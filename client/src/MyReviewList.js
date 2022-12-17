@@ -1,9 +1,12 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
+import { MyContext } from './Context'
 import { useHistory } from "react-router-dom";
 import Button from '@mui/material/Button';
 import Title from './Title';
 
-export default function MyReviewList({ reviewedCards }) {
+export default function MyReviewList() {
+  const contextData = useContext(MyContext)
+  const reviewedCards = contextData.cartReview.purchased_carts
   let history = useHistory();
 
   const uniqueIds = []

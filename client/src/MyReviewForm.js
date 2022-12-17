@@ -32,8 +32,7 @@ const ratings = [
 ]
 
 
-function MyReviewForm({ cards, reviews, handleNewReview }) {
-  // user, 
+function MyReviewForm() {
   const contextData = useContext(MyContext)
   
   const params = useParams()

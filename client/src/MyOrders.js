@@ -12,10 +12,9 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function MyOrders( {completedOrders }) {
+export default function MyOrders() {
   const contextData = useContext(MyContext)
-
-  console.log(completedOrders)
+  const completedOrders = contextData.cartReview.purchased_carts
 
   const price = completedOrders?.map((cart) => cart.map((card) => card.price))
   const cartTotal = price?.map((amount) => amount.map(Number))

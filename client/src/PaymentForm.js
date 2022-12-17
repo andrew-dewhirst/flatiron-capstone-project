@@ -1,11 +1,14 @@
-import * as React from 'react';
+import React, { useContext } from "react";
+import { MyContext } from './Context'
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
-export default function PaymentForm({ setCardName, setCardNumber, setExpDate, setSecurityCode }) {
+export default function PaymentForm() {
+  const contextData = useContext(MyContext)
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -23,7 +26,7 @@ export default function PaymentForm({ setCardName, setCardNumber, setExpDate, se
             fullWidth
             autoComplete="cc-name"
             variant="standard"
-            onChange={(e) => setCardName(e.target.value)}
+            onChange={(e) => contextData.setCardName(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -34,7 +37,7 @@ export default function PaymentForm({ setCardName, setCardNumber, setExpDate, se
             fullWidth
             autoComplete="cc-number"
             variant="standard"
-            onChange={(e) => setCardNumber(e.target.value)}
+            onChange={(e) => contextData.setCardNumber(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -45,7 +48,7 @@ export default function PaymentForm({ setCardName, setCardNumber, setExpDate, se
             fullWidth
             autoComplete="cc-exp"
             variant="standard"
-            onChange={(e) => setExpDate(e.target.value)}
+            onChange={(e) => contextData.setExpDate(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -57,7 +60,7 @@ export default function PaymentForm({ setCardName, setCardNumber, setExpDate, se
             fullWidth
             autoComplete="cc-csc"
             variant="standard"
-            onChange={(e) => setSecurityCode(e.target.value)}
+            onChange={(e) => contextData.setSecurityCode(e.target.value)}
           />
         </Grid>
         <Grid item xs={12}>

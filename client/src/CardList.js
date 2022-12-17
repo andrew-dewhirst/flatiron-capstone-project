@@ -30,7 +30,6 @@ function CardList() {
         <CardInfo
           key={card.id}
           card={card}
-          lineItems={card.line_items}
           handleAddLineItem={contextData.handleAddLineItem}
           handleLineItemDelete={contextData.handleLineItemDelete}
         />

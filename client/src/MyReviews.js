@@ -4,8 +4,7 @@ import { useParams } from 'react-router-dom';
 import MyReviewCard from "./MyReviewCard";
 import MyReviewForm from "./MyReviewForm";
 
-function MyReviews({ cards, reviews, handleNewReview, handleDeletedReview, handleUpdatedReview }) 
-// user
+function MyReviews() 
 {
   const contextData = useContext(MyContext)
   
@@ -21,14 +20,9 @@ function MyReviews({ cards, reviews, handleNewReview, handleDeletedReview, handl
         card={card}
         handleDeletedReview={contextData.handleDeletedReview}
         handleUpdatedReview={contextData.handleUpdatedReview}
-        // reviews={reviews}
         />
        )}
       <MyReviewForm />
-      {/* handleNewReview={handleNewReview} */}
-      {/* reviews={reviews} */}
-      {/* user={user} */}
-      {/* cards={cards}  */}
     </div>
   )
 }

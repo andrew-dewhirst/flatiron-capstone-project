@@ -17,8 +17,7 @@ import Snackbar from '@mui/material/Snackbar';
 
 const theme = createTheme();
 
-export default function CardInfo({ lineItems, card, handleCheckoutClick, handleAddLineItem, handleLineItemDelete }) {
-  // cart, 
+export default function CardInfo({ card, handleAddLineItem, handleLineItemDelete }) {
 
   const contextData = useContext(MyContext)
 

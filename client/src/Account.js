@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -61,19 +61,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const mdTheme = createTheme();
 
 export default function Account() {
-  const [cartReview, setCartReview] = useState({});
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
-
-  useEffect(() => {
-    fetch(`/carts`)
-      .then((r) => r.json())
-      .then((cart) => setCartReview(cart));
-  }, []);
-
-  console.log(cartReview.purchased_carts)
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -122,12 +113,12 @@ export default function Account() {
                     height: 240,
                   }}
                 >
-                  <MyReviewList reviewedCards={cartReview.purchased_carts} />
+                  <MyReviewList />
                 </Paper>
               </Grid>
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <MyOrders completedOrders={cartReview.purchased_carts} />
+                  <MyOrders />
                 </Paper>
               </Grid>
             </Grid>

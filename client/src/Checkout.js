@@ -37,20 +37,6 @@ const theme = createTheme();
 export default function Checkout() {
   const contextData = useContext(MyContext)
 
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
-  const [address1, setAddress1] = useState("")
-  const [address2, setAddress2] = useState("")
-  const [city, setCity] = useState("")
-  const [state, setState] = useState("")
-  const [zip, setZip] = useState("")
-  const [country, setCountry] = useState("")
-  const [cardName, setCardName] = useState("")
-  const [cardNumber, setCardNumber] = useState("")
-  const [expDate, setExpDate] = useState("")
-  const [securityCode, setSecurityCode] = useState("")
-  const [cart, setCart] = useState([])
-
   function handlePaymentClick() {
     fetch(`http://localhost:3000/carts/${contextData.user.cart.id}`, {
       method: "PATCH",
@@ -65,24 +51,20 @@ export default function Checkout() {
       .then((updatedCart) => console.log(updatedCart));
 }
 
-  console.log(cart)
-
   useEffect(() => {
     fetch(`/carts/${contextData.user.cart.id}`)
       .then((r) => r.json())
-      .then((cart) => setCart(cart));
+      .then((cart) => contextData.setCart(cart));
   }, []);
-
-  console.log(cart)
 
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <AddressForm setFirstName={setFirstName} setLastName={setLastName} setAddress1={setAddress1} setAddress2={setAddress2} setCity={setCity} setState={setState} setZip={setZip} setCountry={setCountry}/>;
+        return <AddressForm />;
       case 1:
-        return <PaymentForm setCardName={setCardName} setCardNumber={setCardNumber} setExpDate={setExpDate} setSecurityCode={setSecurityCode} />;
+        return <PaymentForm />;
       case 2:
-        return <OrderForm firstName={firstName} lastName={lastName} address1={address1} address2={address2} city={city} state={state} zip={zip} country={country} cardName={cardName} cardNumber={cardNumber} expDate={expDate} cart={cart} handlePaymentClick={handlePaymentClick}/>;
+        return <OrderForm handlePaymentClick={handlePaymentClick}/>;
       default:
         throw new Error('Unknown step');
     }

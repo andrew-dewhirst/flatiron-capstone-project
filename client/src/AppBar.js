@@ -27,7 +27,7 @@ function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   
-  const cartIconCount = contextData.lineItems.filter((lineItem) => lineItem.cart_id === contextData.user?.cart?.id).length
+  const cartIconCount = contextData.lineItems?.filter((lineItem) => lineItem.cart_id === contextData.user?.cart?.id).length
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);

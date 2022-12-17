@@ -12,6 +12,20 @@ const MyProvider = (props) => {
   const [reviews, setReviews] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [errors, setErrors] = useState([]);
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [address1, setAddress1] = useState("")
+  const [address2, setAddress2] = useState("")
+  const [city, setCity] = useState("")
+  const [state, setState] = useState("")
+  const [zip, setZip] = useState("")
+  const [country, setCountry] = useState("")
+  const [cardName, setCardName] = useState("")
+  const [cardNumber, setCardNumber] = useState("")
+  const [expDate, setExpDate] = useState("")
+  const [securityCode, setSecurityCode] = useState("")
+  const [cart, setCart] = useState([])
+  const [cartReview, setCartReview] = useState({});
 
   let history = useHistory();
 
@@ -40,6 +54,12 @@ const MyProvider = (props) => {
     .then((r) => r.json())
     .then((lineItem) => setLineItems(lineItem))
   }, [])
+
+  useEffect(() => {
+    fetch(`/carts`)
+      .then((r) => r.json())
+      .then((cart) => setCartReview(cart));
+  }, []);
 
   const cardsToDisplay = cards.filter((card) => card.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
@@ -92,6 +112,34 @@ const MyProvider = (props) => {
       errors: errors,
       setErrors: setErrors,
       cardsToDisplay: cardsToDisplay,
+      firstName: firstName,
+      setFirstName: setFirstName,
+      lastName: lastName,
+      setLastName: setLastName,
+      address1: address1,
+      setAddress1: setAddress1,
+      address2: address2,
+      setAddress2: setAddress2,
+      city: city,
+      setCity: setCity,
+      state: state,
+      setState: setState,
+      zip: zip,
+      setZip: setZip,
+      country: country,
+      setCountry: setCountry,
+      cardName: cardName,
+      setCardName: setCardName,
+      cardNumber: cardNumber,
+      setCardNumber: setCardNumber,
+      expDate: expDate,
+      setExpDate: setExpDate,
+      securityCode: securityCode,
+      setSecurityCode: setSecurityCode,
+      cart: cart,
+      setCart: setCart,
+      cartReview: cartReview,
+      setCartReview: setCartReview,
       handleLogoutClick: handleLogoutClick,
       handleAddLineItem: handleAddLineItem,
       handleLineItemDelete: handleLineItemDelete,

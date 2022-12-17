@@ -44,8 +44,6 @@ export default function SignUp() {
 
   let history = useHistory();
 
-  console.log(avatar)
-
   function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData();
