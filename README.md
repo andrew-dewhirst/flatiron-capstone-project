@@ -1,3 +1,35 @@
+# Capstone Project - Card Collector Emporium
+
+## Description
+
+Come shop on Card Collector Emporium, the premium card collecting site. You have the ability to create an account, add or remove items from your cart, and make purchases. Post-purchase, you can view your account information and leave reviews for the cards you've purchased.
+
+## Front End
+
+The front end of Renov8 was built using React (see "Project Template" below for more details), and the individual Components can be found within the src folder.
+
+## Back End
+
+The back end of Renov8 was built using Rails (see "Project Template" below for more details). Running `bundle install` will install all the gems and dependencies needed for this app.
+
+## User Story
+
+As a user, I can:
+- Log in and out of the site
+- View all of the cards on the site and add or remove them from my cart
+- Purchase the card(s) and move through the shipping/payment/order process
+- View my specific purchases and information around those purchases
+- Create a new review for any of the cards I purchased
+- View, edit or delete a review for any of the cards I purchased
+
+## Stretch Goals/Future Functionality - Coming Soon!
+
+As a user, I can:
+- Utilize advanced filtering to search by price, rarity, quantity, etc
+- Create a "loyalty" account to receive preferred access to later drops
+- Access the store even if I am unauthenticated
+- Review more granular information about my profile/account
+
 # Project Template: React/Rails API
 
 ## Description
