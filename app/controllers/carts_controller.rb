@@ -1,6 +1,7 @@
 class CartsController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
+  # Show all the carts belonging to a specific user
   def index
     user = User.find_by(id: session[:user_id])
     active_carts = user.carts.where(has_converted: false).map { |cart| cart.cards }
@@ -12,6 +13,7 @@ class CartsController < ApplicationController
     end
   end
 
+  # Show current cart only
   def show
     active_cart = Cart.find_by(id: params[:id])
     if active_cart
@@ -21,17 +23,7 @@ class CartsController < ApplicationController
     end
   end
 
-  def new
-    user = User.find_by(id: session[:user_id])
-    active_cart = user.carts.where(has_converted: false).first
-    if !active_cart
-      new_cart = Cart.create!(user_id: user.id, has_converted: false)
-      render json: new_cart, status: :created
-    else
-      render json: active_cart
-    end
-  end
-
+  # Update cart to a "has converted" cart - proxy for purchased cart
   def update
     cart = Cart.find_by(id: params[:id])
       cart.update!(cart_params)

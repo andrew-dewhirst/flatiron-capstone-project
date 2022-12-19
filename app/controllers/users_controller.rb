@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     render json: user, status: :created
   end
 
+  # Show the active user and their associated cart - if no cart, create new cart
   def show
     user = User.find_by(id: session[:user_id])
     active_cart = user.carts.where(has_converted: false).first
