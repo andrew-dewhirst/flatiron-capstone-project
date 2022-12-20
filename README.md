@@ -53,7 +53,7 @@ Start by **cloning** (not forking) the project template repository and removing
 the remote:
 
 ```console
-$ git clone git@github.com:learn-co-curriculum/project-template-react-rails-api.git your-project-name
+$ git clone git@github.com:andrew-dewhirst/flatiron-capstone-project your-project-name
 $ cd your-project-name
 $ git remote rm origin
 ```
