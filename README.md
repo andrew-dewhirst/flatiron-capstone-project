@@ -87,7 +87,7 @@ When you're ready to start building your project, run:
 
 ```sh
 bundle install
-rake db: reset db:migrate
+rake db:reset db:migrate
 npm install --prefix client
 ```
 
