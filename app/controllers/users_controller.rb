@@ -10,7 +10,8 @@ class UsersController < ApplicationController
   def create
     user = User.create!(user_params)
     session[:user_id] = user.id
-    render json: user, status: :created
+    new_cart = Cart.create!(user_id: user.id, has_converted: false)
+    render json: {user:user, cart: new_cart}, status: :created
   end
 
   # Show the active user and their associated cart - if no cart, create new cart
