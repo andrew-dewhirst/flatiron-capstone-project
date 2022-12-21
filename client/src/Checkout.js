@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CartReview from "./CartReview";
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import OrderForm from './OrderForm';
@@ -30,7 +31,7 @@ function Copyright() {
   );
 }
 
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
+const steps = ['Review your cart','Shipping address', 'Payment details', 'Review your order'];
 
 const theme = createTheme();
 
@@ -60,10 +61,12 @@ export default function Checkout() {
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <AddressForm />;
+        return <CartReview /> ;
       case 1:
-        return <PaymentForm />;
+        return <AddressForm />;
       case 2:
+        return <PaymentForm />;
+      case 3:
         return <OrderForm handlePaymentClick={handlePaymentClick}/>;
       default:
         throw new Error('Unknown step');

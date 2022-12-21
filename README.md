@@ -6,11 +6,11 @@ Come shop on Card Collector Emporium, the premium card collecting site. You have
 
 ## Front End
 
-The front end of Renov8 was built using React (see "Project Template" below for more details), and the individual Components can be found within the src folder.
+The front end of Card Collector Emporium was built using React (see "Project Template" below for more details), and the individual Components can be found within the src folder.
 
 ## Back End
 
-The back end of Renov8 was built using Rails (see "Project Template" below for more details). Running `bundle install` will install all the gems and dependencies needed for this app.
+The back end of Card Collector Emporium was built using Rails (see "Project Template" below for more details). Running `bundle install` will install all the gems and dependencies needed for this app.
 
 ## User Story
 
@@ -67,14 +67,6 @@ on GitHub will cause issues.
 
 [create repo]: https://docs.github.com/en/github/importing-your-projects-to-github/importing-source-code-to-github/adding-an-existing-project-to-github-using-the-command-line#adding-a-project-to-github-without-github-cli
 
-If you're working with a partner,
-[add them as a collaborator][add collaborator] on GitHub. From your repo on
-GitHub, go to Settings > Manage Access > Invite a collaborator and enter your
-partner's username. Once your partner has access, they should git **clone** (not
-fork) the repository.
-
-[add collaborator]: https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-user-account/managing-access-to-your-personal-repositories/inviting-collaborators-to-a-personal-repository
-
 Finally, connect the GitHub remote repository to your local repository and push
 up your code:
 
@@ -87,8 +79,11 @@ When you're ready to start building your project, run:
 
 ```sh
 bundle install
-rake db:reset db:migrate
 npm install --prefix client
+rake db:drop
+rake db:create
+rake db:migrate
+rake db:seed
 ```
 
 You can use the following commands to run the application:

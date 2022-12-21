@@ -99,6 +99,11 @@ const MyProvider = (props) => {
     setReviews([...reviews, newReview])
   };
 
+  function handleUpdatedCart(deletedCartItem) {
+    const updatedCart = cart.filter((lineItem) => lineItem.id !== deletedCartItem)
+    setCart(updatedCart);
+  }
+
   return (
     <MyContext.Provider value={{
       user: user,
@@ -148,7 +153,8 @@ const MyProvider = (props) => {
       handleLineItemDelete: handleLineItemDelete,
       handleUpdatedReview: handleUpdatedReview,
       handleDeletedReview: handleDeletedReview,
-      handleNewReview: handleNewReview
+      handleNewReview: handleNewReview,
+      handleUpdatedCart: handleUpdatedCart,
       }}>
       {props.children}
     </MyContext.Provider>

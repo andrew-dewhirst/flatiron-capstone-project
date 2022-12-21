@@ -44,7 +44,6 @@ export default function SignIn() {
       body: JSON.stringify({
         username: data.get('username'),
         password: data.get('password'),
-        password_confirmation: data.get('confirm-password'),
       }),
     })
     .then((response) => {
@@ -94,16 +93,6 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="confirm-password"
-              label="Confirm Password"
-              type="password"
-              id="confirm-password"
-              autoComplete="confirm-password"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
