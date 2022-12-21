@@ -5,20 +5,10 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
-import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Button from '@mui/material/Button';
 
 export default function CartReview() {
   const contextData = useContext(MyContext)
-
-  const addresses = [contextData.address1, contextData.address2, contextData.city, contextData.state, contextData.zip, contextData.country];
-  const payments = [
-    { name: 'Card type', detail: 'Visa' },
-    { name: 'Card holder', detail: `${contextData.cardName}` },
-    { name: 'Card number', detail: `${contextData.cardNumber}` },
-    { name: 'Expiry date', detail: `${contextData.expDate}` },
-  ];
 
   const price = contextData.cart.map((card) => card.price)
   const cartTotal = price.map(Number)
